@@ -4,7 +4,7 @@ using System.Collections;
 using DG.Tweening;
 public class UI_PopUpView : UIView
 {
-    public Image mBgMask;
+    //public Image mBgMask;
     public RectTransform mRectMainPanel;
     Vector3 mDefaultSize = new Vector3(0.8f, 0.8f, 0.8f);
     Vector3 mTargetSize = Vector3.one;
@@ -22,7 +22,7 @@ public class UI_PopUpView : UIView
     }
     protected virtual void ShowView()
     {
-        GameTime.Instance.HasUiPopup = true;
+        //GameTime.Instance.HasUiPopup = true;
         mRectMainPanel.transform.DOScale(mTargetSize, 0.3f).SetEase(mShowEase).OnComplete(AddMaskEffect);
 
         HideShowOtherUIView(true);
@@ -38,7 +38,7 @@ public class UI_PopUpView : UIView
 
         HideShowOtherUIView(false);
         //游戏进程开始
-        GameTime.Instance.HasUiPopup = false;
+        //GameTime.Instance.HasUiPopup = false;
     }
     void AddMaskEffect()
     {

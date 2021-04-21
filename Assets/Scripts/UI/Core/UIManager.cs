@@ -10,6 +10,7 @@ public class UIManager : MonoSingleton<UIManager>
     {
         base.Awake();
         DontDestroyOnLoad(this);
+        m_dicViewType.Add(typeof(UI_Begin), "UI_Begin");
     }
     public T CreateUIViewInstance<T>() where T : UIView
     {

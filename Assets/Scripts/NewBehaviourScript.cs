@@ -7,12 +7,12 @@ public class NewBehaviourScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("");
+        Debug.Log("生成UI_Begin");
+        UIManager.Instance.CreateUIViewInstance<UI_Begin>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 }
