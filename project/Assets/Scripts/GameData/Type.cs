@@ -1,4 +1,12 @@
 ﻿using System;
+
+
+public enum E_PlayerState
+{
+    E_Idle,
+    E_Walk,
+    E_Jump,
+}
 public enum E_PlatForm
 {
     ENone,

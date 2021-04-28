@@ -8,9 +8,11 @@ public class PlayerController : MonoBehaviour
     //public GameObject Dest;
     public Camera cam;
     private NavMeshAgent agent;
+    //private Animator mAnimator;
     // Start is called before the first frame update
     void Start()
     {
+        //mAnimator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         //agent.SetDestination(Dest.transform.position);
     }
@@ -20,12 +22,22 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
+            //mAnimator.SetBool("Walk", true);
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit Hit;
             if(Physics.Raycast(ray,out Hit))
             {
                 agent.SetDestination(Hit.point);
             }
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.name == "BridgeTrigger")
+        {
+            Debug.Log("碰到了");
+            //Dest.SetActive(true);
+            NavmeshDirector.Instance.BuildNav(); 
         }
     }
 }
