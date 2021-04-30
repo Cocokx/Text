@@ -8,11 +8,11 @@ public class PlayerController : MonoBehaviour
     //public GameObject Dest;
     public Camera cam;
     private NavMeshAgent agent;
-    //private Animator mAnimator;
+    private Animator mAnimator;
     // Start is called before the first frame update
     void Start()
     {
-        //mAnimator = GetComponent<Animator>();
+        mAnimator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         //agent.SetDestination(Dest.transform.position);
     }
@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            //mAnimator.SetBool("Walk", true);
+            mAnimator.SetInteger("PlayerState", 1);
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit Hit;
             if(Physics.Raycast(ray,out Hit))

@@ -34,14 +34,16 @@ public class Test : MonoBehaviour
             //摄像机到点击位置的的射线  
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
+            Debug.Log("鼠标点击");
             if (Physics.Raycast(ray, out hit))
             {
                 //判断点击的是否地形  
-                if (hit.collider.tag.Equals("Obstacle"))
+                //if (hit.collider.tag.Equals("Obstacle"))
                 {
                     begin = true;
                     //点击位置坐标  
                     target = hit.point;
+                    Debug.Log("target" + target);
                 }
             }
         }
@@ -233,8 +235,8 @@ public class Test : MonoBehaviour
 
         // 把walk和run动画放到同一层，然后同步他们的速度。  
         anim["Walk"].layer = 1;
-        anim["Run"].layer = 1;
-        anim.SyncLayer(1);
+        //anim["Run"].layer = 1;
+        //anim.SyncLayer(1);
 
         //设置“跳跃”，“爬楼梯”，“下楼梯”的动画模式和速度  
         anim["Jump"].wrapMode = WrapMode.ClampForever;
@@ -264,22 +266,20 @@ public class Test : MonoBehaviour
         //设置Run动画的速度  
         anim["Run"].speed = speed / runAnimationSpeed;
         //设置Walk动画的速度  
-        anim["Walk"].speed = speed / walkAnimationSpeed;
+        anim["Walk"].speed = 2;
         //if (agent.velocity.y > 0)
         //{
         //    anim.CrossFade("ClimbUp");
         //}
         //根据agent的速度大小，确定animation的播放状态  
-        if (speed > (walkAnimationSpeed + runAnimationSpeed) / 2)
+        if (speed > speedThreshold)
         {
-            anim.CrossFade("Run");
-        }
-        else if (speed > speedThreshold)
-        {
+            Debug.Log("walk");
             anim.CrossFade("Walk");
         }
         else
         {
+            Debug.Log("idle");
             anim.CrossFade("Idle", 0.1f, PlayMode.StopAll);
         }
     }
