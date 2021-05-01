@@ -5,7 +5,7 @@ public enum E_PlayerState
 {
     E_Idle,
     E_Walk,
-    E_Jump,
+    E_Climb,
 }
 public enum E_PlatForm
 {

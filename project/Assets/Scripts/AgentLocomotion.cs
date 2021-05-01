@@ -76,7 +76,7 @@ public class AgentLocomotion : MonoBehaviour
                 mAnimator.SetBool("Jump", false);
                 mAnimator.SetBool("Walk", false);
                 break;
-            case E_PlayerState.E_Jump:
+            case E_PlayerState.E_Climb:
                 mAnimator.SetBool("Idle", false);
                 mAnimator.SetBool("Jump", true);
                 mAnimator.SetBool("Walk", false);
