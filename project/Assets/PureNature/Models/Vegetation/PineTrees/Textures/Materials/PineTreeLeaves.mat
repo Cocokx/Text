@@ -142,7 +142,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _GradientFalloff: 2
+    - _GradientFalloff: 1.23
     - _GradientFalloff1: 1.18
     - _GradientPosition: 1
     - _GradientPosition1: -0.53
