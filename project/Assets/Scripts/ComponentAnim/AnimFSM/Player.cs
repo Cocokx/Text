@@ -73,16 +73,21 @@ public class Player : MonoBehaviour
                 ps = E_PlayerState.E_Idle;
             }
         }
-        Debug.Log(canClimb);
-        if (agent.isOnOffMeshLink && agent.currentOffMeshLinkData.offMeshLink.area == 3 && canClimb)
+        Debug.Log(agent.isOnOffMeshLink);
+        if (agent.isOnOffMeshLink )
         {
-            Debug.Log("aaa");
-            canClimb = false;
-            agent.isStopped = true;
-            ps = E_PlayerState.E_Climb;
-            machine.TranslateState((int)ps);
-            
+            Debug.Log(agent.currentOffMeshLinkData.offMeshLink.area);
+            if (agent.currentOffMeshLinkData.offMeshLink.area == 3 && canClimb)
+            {
+                Debug.Log("aaa");
+                canClimb = false;
+                agent.isStopped = true;
+                ps = E_PlayerState.E_Climb;
+                machine.TranslateState((int)ps);
+
+            }
         }
+            
     }
     
     private void UpdateAnimation()
