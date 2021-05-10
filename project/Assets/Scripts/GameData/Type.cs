@@ -7,6 +7,20 @@ public enum E_PlayerState
     E_Walk,
     E_Climb,
 }
+public enum E_KeyEffect
+{
+    E_None,
+    E_Unlock,
+    E_Creat,
+}
+
+public enum E_Prop
+{
+    E_PlaneKey,
+    E_RoomKey,
+    E_LiftKey,
+    E_Seed,
+}
 public enum E_PlatForm
 {
     ENone,

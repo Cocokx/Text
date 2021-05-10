@@ -9,8 +9,8 @@ public class NavmeshDirector : MonoSingleton<NavmeshDirector>
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(this);
-        BuildNav();
+        //DontDestroyOnLoad(this);
+        //BuildNav();
     }
 
     // Update is called once per frame

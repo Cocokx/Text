@@ -35,5 +35,13 @@ public class DataDefine {
 	public const int Duties_BossDutiesUnlockItemInfo_Id = 0;
 	public const int Duties_BossDutiesUnlockItemInfo_Name = 1;
 	public const int Duties_BossDutiesUnlockItemInfo_Desc = 2;
+	public const int GameObject_GameKey_Id = 0;
+	public const int GameObject_GameKey_Texture = 1;
+	public const int GameObject_GameKey_Name = 2;
+	public const int GameObject_GameKey_Desc = 3;
+	public const int GameObject_GameKey_Effect = 4;
+	public const int GameObject_GameKey_ObjName = 5;
+	public const int GameObject_Prop_Id = 0;
+	public const int GameObject_Prop_ObjName = 1;
 
 }
