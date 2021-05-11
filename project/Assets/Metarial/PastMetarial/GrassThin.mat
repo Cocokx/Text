@@ -33,7 +33,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 92fb759ae491e0b4c9a24fb1347ad9d4, type: 3}
+        m_Texture: {fileID: 2800000, guid: f260bf73a8296534786c8f7e5bfb0acf, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -80,7 +80,7 @@ Material:
     - _Blend: 0
     - _BumpScale: 1
     - _ColorMapHeight: 0
-    - _ColorMapStrength: 1
+    - _ColorMapStrength: 0.588
     - _Cull: 0
     - _Cutoff: 0.5
     - _Darkening: 0.1
@@ -118,12 +118,12 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.3917365, g: 1, b: 0, a: 1}
+    - _BaseColor: {r: 0.6784314, g: 0.57442755, b: 0.10588234, a: 1}
     - _BendTint: {r: 0.8, g: 0.8, b: 0.8, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FadeParams: {r: 50, g: 100, b: 0, a: 0}
-    - _HueVariation: {r: 0.5529412, g: 0.8588236, b: 0.34901962, a: 0.15}
+    - _HueVariation: {r: 0.85882354, g: 0.7789486, b: 0.34901968, a: 0.6509804}
     - _NormalParams: {r: 0, g: 0, b: 0, a: 0}
     - _ScalemapInfluence: {r: 0, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

@@ -28,7 +28,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
-        m_Texture: {fileID: 2800000, guid: 1bbb6f363f884124aaa1cad8329f78cf, type: 3}
+        m_Texture: {fileID: 2800000, guid: 46cd2908f4902a141aba4070f746d490, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailMask:
@@ -81,6 +81,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _2ndNormalPower: 1
+    - _AlphaCutoff: 0.5
     - _BaseWindChannel: 2
     - _BlendNormals: 1
     - _BumpScale: 1
@@ -107,13 +108,16 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _InvertMask: 0
+    - _LayerChannel: 1
     - _LayerContrast: 0
+    - _LayerMetallicPower: 0.5
     - _LayerOcclusionPower: 1
     - _LayerPosition: 0
     - _LayerPower: 0.292
     - _LayerSmoothnessPower: 0.5
     - _LayerThreshold: 50
     - _Metallic: 0
+    - _MetallicPower: 0.5
     - _Mode: 0
     - _NormalPower: 1
     - _OcclusionPower: 0.939
