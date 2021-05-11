@@ -405,3 +405,113 @@ public class TabletBossDutiesUnlockItemInfo : TableData
     }
 }
 #endregion
+#region GameKey
+public class TableGameKey : TableData
+{
+    public readonly string sFilePath = "tGameKey";
+    protected override string GetPath()
+    {
+        return sFilePath;
+    }
+    public class ObjTabletGameKey
+    {
+        public int mId;
+        public string mName;
+        public string mTexture;
+        public string mDesc;
+        public string mObjName;
+        public E_KeyEffect mEffet;
+    }
+    Dictionary<int, ObjTabletGameKey> mDicInfo;
+    Dictionary<string, ObjTabletGameKey> mDicInfoName;
+    List<ObjTabletGameKey> allGameKey;
+    protected override void _ParseData()
+    {
+        mDicInfo = new Dictionary<int, ObjTabletGameKey>();
+        mDicInfoName = new Dictionary<string, ObjTabletGameKey>();
+        allGameKey = new List<ObjTabletGameKey>();
+        for (int i = 0; i < mTableData._nRows; i++)
+        {
+            ObjTabletGameKey info = new ObjTabletGameKey();
+            info.mId = mTableData.GetInt(i, DataDefine.GameObject_GameKey_Id);
+            info.mEffet = (E_KeyEffect)mTableData.GetInt(i, DataDefine.GameObject_GameKey_Id);
+            info.mName = mTableData.GetStr(i, DataDefine.GameObject_GameKey_Name);
+            info.mDesc = mTableData.GetStr(i, DataDefine.GameObject_GameKey_Desc);
+            info.mTexture = mTableData.GetStr(i, DataDefine.GameObject_GameKey_Texture);
+            info.mObjName = mTableData.GetStr(i, DataDefine.GameObject_GameKey_ObjName);
+            
+            mDicInfo[info.mId] = info;
+            mDicInfoName[info.mObjName] = info;
+            allGameKey.Add(info);
+        }
+    }
+
+    public ObjTabletGameKey GetTabletGameKeyById(int _id)
+    {
+        if (null != mDicInfo && mDicInfo.ContainsKey(_id))
+            return mDicInfo[_id];
+        return null;
+    }
+    public ObjTabletGameKey GetTabletGameKeyByObjName(string _objName)
+    {
+        if (null != mDicInfoName && mDicInfoName.ContainsKey(_objName))
+            return mDicInfoName[_objName];
+        return null;
+    }
+    public List<ObjTabletGameKey> GetAllTabletGameKey()
+    {
+        return allGameKey;
+    }
+}
+#endregion
+#region GameProp
+public class TableGameProp : TableData
+{
+    public readonly string sFilePath = "tProp";
+    protected override string GetPath()
+    {
+        return sFilePath;
+    }
+    public class ObjTabletGameProp
+    {
+        public int mId;
+        public string mObjName;
+    }
+    Dictionary<string, ObjTabletGameProp> mDicInfo;
+    Dictionary<int, ObjTabletGameProp> mDicInfoById;
+    List<ObjTabletGameProp> allGameProp;
+    protected override void _ParseData()
+    {
+        mDicInfo = new Dictionary<string, ObjTabletGameProp>();
+        mDicInfoById = new Dictionary<int, ObjTabletGameProp>();
+        allGameProp = new List<ObjTabletGameProp>();
+        for (int i = 0; i < mTableData._nRows; i++)
+        {
+            ObjTabletGameProp info = new ObjTabletGameProp();
+            info.mId = mTableData.GetInt(i, DataDefine.GameObject_Prop_Id);
+            info.mObjName = mTableData.GetStr(i, DataDefine.GameObject_Prop_ObjName);
+
+            mDicInfo[info.mObjName] = info;
+            mDicInfoById[info.mId] = info;
+            allGameProp.Add(info);
+        }
+    }
+
+    public ObjTabletGameProp GetTabletGamePropByObjName(string _objName)
+    {
+        if (null != mDicInfo && mDicInfo.ContainsKey(_objName))
+            return mDicInfo[_objName];
+        return null;
+    }
+    public ObjTabletGameProp GetTabletGamePropById(int _id)
+    {
+        if (null != mDicInfoById && mDicInfoById.ContainsKey(_id))
+            return mDicInfoById[_id];
+        return null;
+    }
+    public List<ObjTabletGameProp> GetAllTabletGameProp()
+    {
+        return allGameProp;
+    }
+}
+#endregion

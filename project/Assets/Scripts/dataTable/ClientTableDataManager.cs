@@ -31,6 +31,9 @@ public class ClientTableDataManager
     public TabletBossDutiesInfo mTabletBossDutiesInfo;
     public TabletBossDutiesUnlockInfo mTabletBossDutiesUnlockInfo;
     public TabletBossDutiesUnlockItemInfo mTabletBossDutiesUnlockItemInfo;
+
+    public TableGameKey mTableGameKey;
+    public TableGameProp mTableGameProp;
     
 
     public bool sInited = false;
@@ -124,6 +127,65 @@ public class ClientTableDataManager
         }
         return mTabletBossDutiesUnlockItemInfo.GetBossDutiesUnlockItemInfoById(_id);
     }
+    public List<TableGameKey.ObjTabletGameKey> GetAllTabletGameKey()
+    {
+        if (null == mTableGameKey)
+        {
+            mTableGameKey = new TableGameKey();
+            mTableGameKey.ReadTable();
+            mTableGameKey.ParseData();
+        }
+        return mTableGameKey.GetAllTabletGameKey();
+    }
 
-    
+    public TableGameKey.ObjTabletGameKey GetTabletGameKeyById(int _id)
+    {
+        if (null == mTableGameKey)
+        {
+            mTableGameKey = new TableGameKey();
+            mTableGameKey.ReadTable();
+            mTableGameKey.ParseData();
+        }
+        return mTableGameKey.GetTabletGameKeyById(_id);
+    }
+    public TableGameKey.ObjTabletGameKey GetTabletGameKeyByObjName(string _objName)
+    {
+        if (null == mTableGameKey)
+        {
+            mTableGameKey = new TableGameKey();
+            mTableGameKey.ReadTable();
+            mTableGameKey.ParseData();
+        }
+        return mTableGameKey.GetTabletGameKeyByObjName(_objName);
+    }
+    public List<TableGameProp.ObjTabletGameProp> GetAllTabletGameProp()
+    {
+        if (null == mTableGameProp)
+        {
+            mTableGameProp = new TableGameProp();
+            mTableGameProp.ReadTable();
+            mTableGameProp.ParseData();
+        }
+        return mTableGameProp.GetAllTabletGameProp();
+    }
+    public TableGameProp.ObjTabletGameProp GetTabletGamePropByObjName(string _objName)
+    {
+        if (null == mTableGameProp)
+        {
+            mTableGameProp = new TableGameProp();
+            mTableGameProp.ReadTable();
+            mTableGameProp.ParseData();
+        }
+        return mTableGameProp.GetTabletGamePropByObjName(_objName);
+    }
+    public TableGameProp.ObjTabletGameProp GetTabletGamePropById(int _id)
+    {
+        if (null == mTableGameProp)
+        {
+            mTableGameProp = new TableGameProp();
+            mTableGameProp.ReadTable();
+            mTableGameProp.ParseData();
+        }
+        return mTableGameProp.GetTabletGamePropById(_id);
+    }
 }

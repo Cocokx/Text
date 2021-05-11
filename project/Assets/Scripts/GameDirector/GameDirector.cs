@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class GameDirector : MonoSingleton<GameDirector>
+public class GameDirector : MonoBehaviour
 {
-    
-    // Start is called before the first frame update
-    void Start()
+    public static GameDirector Instance = null;
+    private void Awake()
     {
-        
-    }
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        SceneInfoManager.Instance.IsInScene1 = true;
+    }   
+    
 
     // Update is called once per frame
     void Update()

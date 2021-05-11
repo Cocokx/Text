@@ -24,6 +24,7 @@ public class Test : MonoBehaviour
         AnimationSetup();
         //起一个协程，处理动画状态机  
         StartCoroutine(AnimationStateMachine());
+        
     }
 
     void Update()

@@ -2,15 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
     
-public class UIManager : MonoSingleton<UIManager>
+public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance = null;
     private Dictionary<Type, string> m_dicViewType = new Dictionary<Type, string>();
     private Dictionary<Type, UIView> m_dicViewInstance = new Dictionary<Type, UIView>();
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
-        DontDestroyOnLoad(this);
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
         m_dicViewType.Add(typeof(UI_Begin), "UI_Begin");
+        m_dicViewType.Add(typeof(UI_BackPack), "UI_BackPack");
     }
     public T CreateUIViewInstance<T>() where T : UIView
     {

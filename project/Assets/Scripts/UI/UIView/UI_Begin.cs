@@ -23,6 +23,7 @@ public class UI_Begin : UI_PopUpView
     }
     void BtnConfirmClickHandler()
     {
-        HideView();
+        SceneInfoManager.Instance.LoadScene();
+        //HideView();
     }
 }
