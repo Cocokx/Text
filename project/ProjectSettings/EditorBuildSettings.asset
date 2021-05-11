@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/PureNature/Scenes/Scene_Demo/Scene_Demo.unity
     guid: d57973a1bebdd054cbe0a992d93ba9b1
+  - enabled: 1
+    path: Assets/Scenes/Scene02.unity
+    guid: 388a9b5347dbaef40b0cd2cd2075dc22
+  - enabled: 1
+    path: Assets/Scenes/Scene01.unity
+    guid: cadc9acc8c6e7e6468e096dea22b37cc
   m_configObjects: {}

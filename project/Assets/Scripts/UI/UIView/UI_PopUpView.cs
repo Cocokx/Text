@@ -22,7 +22,7 @@ public class UI_PopUpView : UIView
     }
     protected virtual void ShowView()
     {
-        //GameTime.Instance.HasUiPopup = true;
+        SceneInfoManager.Instance.HasUiPopup = true;
         mRectMainPanel.transform.DOScale(mTargetSize, 0.3f).SetEase(mShowEase).OnComplete(AddMaskEffect);
 
         HideShowOtherUIView(true);
@@ -38,7 +38,7 @@ public class UI_PopUpView : UIView
 
         HideShowOtherUIView(false);
         //游戏进程开始
-        //GameTime.Instance.HasUiPopup = false;
+        SceneInfoManager.Instance.HasUiPopup = false;
     }
     void AddMaskEffect()
     {

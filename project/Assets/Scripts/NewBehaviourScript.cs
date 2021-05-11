@@ -9,7 +9,7 @@ public class NewBehaviourScript : MonoBehaviour
     {
         Debug.Log("生成UI_Begin");
         UIManager.Instance.CreateUIViewInstance<UI_Begin>();
-        UIManager.Instance.CreateUIViewInstance<UI_BackPack>();
+        //UIManager.Instance.CreateUIViewInstance<UI_BackPack>();
     }
 
     // Update is called once per frame

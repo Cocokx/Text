@@ -41,6 +41,8 @@ public class DataDefine {
 	public const int GameObject_GameKey_Desc = 3;
 	public const int GameObject_GameKey_Effect = 4;
 	public const int GameObject_GameKey_ObjName = 5;
+	public const int GameObject_GameKey_EffectObjName = 6;
+	public const int GameObject_GameKey_EffectId = 7;
 	public const int GameObject_Prop_Id = 0;
 	public const int GameObject_Prop_ObjName = 1;
 

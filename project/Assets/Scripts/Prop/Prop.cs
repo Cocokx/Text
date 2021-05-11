@@ -10,7 +10,7 @@ public class Prop : MonoBehaviour
     {
         if (gameObject.name.IndexOf("(Clone)") > -1)
             gameObject.name = gameObject.name.Replace("(Clone)", "");
-        mInfo = ClientTableDataManager.Instance.GetTabletGameKeyByObjName(gameObject.name);
+        mInfo = ClientTableDataManager.Instance.GetTabletGameKeyByEffectObjName(gameObject.name);
         if (null != mInfo)
             mId = mInfo.mId;
         Debug.Log("id" + mId);

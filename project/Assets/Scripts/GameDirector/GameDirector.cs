@@ -16,8 +16,12 @@ public class GameDirector : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         SceneInfoManager.Instance.IsInScene1 = true;
-    }   
-    
+        GameDataManager.Instance.InitProp();
+    }
+    private void Start()
+    {
+        
+    }
 
     // Update is called once per frame
     void Update()

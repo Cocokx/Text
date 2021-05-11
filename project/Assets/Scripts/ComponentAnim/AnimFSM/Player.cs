@@ -10,18 +10,29 @@ using UnityEngine.AI;
 /// 
 public class Player : MonoBehaviour
 {
+    public static Player Instance = null;
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
     public NavMeshAgent agent;
     //private Animation ani;
     public Animator animator;
     public E_PlayerState ps = E_PlayerState.E_Idle;
-
+    public E_Trigger triggerType = E_Trigger.E_None;
     //控制机器
     public StateMachine machine;
     private Vector3 linkStart;//OffMeshLink的开始点  
     private Vector3 linkEnd;//OffMeshLink的结束点  
     private Quaternion linkRotate;//OffMeshLink的旋转  
     public bool canClimb = true;
-
+    
     
     void Start()
     {
@@ -39,7 +50,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        //鼠标左键点击  
+        //Debug.Log(SceneInfoManager.Instance.IsPause);
+        ////鼠标左键点击  
+        if (SceneInfoManager.Instance.IsPause)
+            return;
         if (Input.GetMouseButtonDown(0))
         {
             //摄像机到点击位置的的射线  
@@ -48,7 +62,15 @@ public class Player : MonoBehaviour
             Debug.Log("鼠标点击");
             if (Physics.Raycast(ray, out hit))
             {
-                agent.SetDestination(hit.point);
+                Debug.LogError("------hit----:" + hit.collider.gameObject.name);
+                Key key = hit.collider.gameObject.GetComponent<Key>();
+                if (null != key && key.ID == (int)triggerType)
+                {
+                    Environment.Instance.DisAppearKeys(ClientTableDataManager.Instance.GetTabletGameKeyById(key.ID));
+                    GameDataManager.Instance.PickProp(ClientTableDataManager.Instance.GetTabletGameKeyById(key.ID));
+                }
+                else
+                    agent.SetDestination(hit.point);
             }
         }
         ChangeState();
@@ -104,5 +126,36 @@ public class Player : MonoBehaviour
     void LateUpdate()
     {
         machine.Update();
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.GetComponent<Key>() != null)
+        {
+            triggerType = (E_Trigger)other.gameObject.GetComponent<Key>().ID;
+            Debug.Log("碰到" + other.gameObject.name);
+            Debug.Log("triggerType" + triggerType);
+        }
+        else if (other.gameObject.GetComponent<Prop>() != null)
+        {
+            TableGameKey.ObjTabletGameKey prop =
+                ClientTableDataManager.Instance.GetTabletGameKeyById(other.gameObject.GetComponent<Prop>().ID);
+            if (prop != null)
+                triggerType = (E_Trigger)prop.mEffectId;
+            Debug.Log("碰到" + other.gameObject.name);
+            Debug.Log("triggerType" + triggerType);
+        }
+        else
+        {
+            //triggerType = E_Trigger.E_None;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.GetComponent<Key>() != null
+            || other.gameObject.GetComponent<Prop>() != null)
+        {
+            triggerType = E_Trigger.E_None;
+            Debug.Log("triggerType" + triggerType);
+        }
     }
 }

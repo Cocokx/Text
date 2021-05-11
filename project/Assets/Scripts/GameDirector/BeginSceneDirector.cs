@@ -17,20 +17,24 @@ public class BeginSceneDirector : MonoBehaviour
     }
     public void InitScene()
     {
-        List<int> listShowPropId = new List<int>();
-        if (GameDataManager.Instance.mListUsedPropId != null)
+        Dictionary<TableGameKey.ObjTabletGameKey, E_PropState> mDicProp = new Dictionary<TableGameKey.ObjTabletGameKey, E_PropState>();
+        if (GameDataManager.Instance.mDicProp != null)
         {
-            listShowPropId = GameDataManager.Instance.mListUsedPropId;
-        }
-        for(int i = 0; i < listShowPropId.Count; i++)
-        {
-            TableGameKey.ObjTabletGameKey objTabletGameKey
-            = ClientTableDataManager.Instance.GetTabletGameKeyById(listShowPropId[i]);
-            if (objTabletGameKey != null)
+            mDicProp = GameDataManager.Instance.mDicProp;
+            foreach (var item in mDicProp.Keys)
             {
-                Environment.Instance.AppearProp(objTabletGameKey);
+                Debug.Log(mDicProp[item]);
+                if (mDicProp[item]==E_PropState.E_PickedUsed)
+                {
+                    Environment.Instance.AppearProp(item);
+                }
+                else if (mDicProp[item] == E_PropState.E_UnPicked)
+                {
+                    Environment.Instance.AppearKey(item);
+                }
             }
         }
+        
         
     }
 }

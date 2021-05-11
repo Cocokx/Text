@@ -29,7 +29,7 @@ public class UI_BackPack : UI_PopUpView
         for (int i = 0; i < mListAllGameKey.Count; i++)
         {
             //在此检测是否解锁
-            //if (BossDutiesUnlockDataManager.Instance.ChekRoomUnlocked(mListAllFurnishingInfo[i].mRoomType))
+            if (GameDataManager.Instance.CheckIsGetUnuseProp(mListAllGameKey[i]))
             {
                 
                 mListGameKey.Add(mListAllGameKey[i]);
@@ -105,12 +105,21 @@ public class UI_BackPack : UI_PopUpView
     void BtnConfirmClickHandler()
     {
         HideView();
-        if(null!= mWillChooseGameKey)
+        if(null!= mWillChooseGameKey && (E_Trigger)mWillChooseGameKey.mEffectId == Player.Instance.triggerType)
         {
             //使用影响,需写
-            Debug.Log("使用："+mWillChooseGameKey.mName);
-            GameDataManager.Instance.UpdateUsedProp(mWillChooseGameKey.mId);
-            Environment.Instance.AppearProp(mWillChooseGameKey);
+            Debug.Log("使用："+mWillChooseGameKey.mEffet);
+            GameDataManager.Instance.UseProp(mWillChooseGameKey);
+            if (mWillChooseGameKey.mEffet == E_KeyEffect.E_Creat)
+            {
+                
+                Environment.Instance.AppearProp(mWillChooseGameKey);
+            }
+            else if(mWillChooseGameKey.mEffet == E_KeyEffect.E_Unlock)
+            {
+
+            }
+            Environment.Instance.DisAppearKeys(mWillChooseGameKey);
 
         }
         mWillChooseGameKey = null;

@@ -419,29 +419,36 @@ public class TableGameKey : TableData
         public string mName;
         public string mTexture;
         public string mDesc;
+        public string mEffectObjName;
         public string mObjName;
+        public int mEffectId;
         public E_KeyEffect mEffet;
     }
     Dictionary<int, ObjTabletGameKey> mDicInfo;
     Dictionary<string, ObjTabletGameKey> mDicInfoName;
+    Dictionary<string, ObjTabletGameKey> mDicInfoEffectObjName;
     List<ObjTabletGameKey> allGameKey;
     protected override void _ParseData()
     {
         mDicInfo = new Dictionary<int, ObjTabletGameKey>();
         mDicInfoName = new Dictionary<string, ObjTabletGameKey>();
+        mDicInfoEffectObjName = new Dictionary<string, ObjTabletGameKey>();
         allGameKey = new List<ObjTabletGameKey>();
         for (int i = 0; i < mTableData._nRows; i++)
         {
             ObjTabletGameKey info = new ObjTabletGameKey();
             info.mId = mTableData.GetInt(i, DataDefine.GameObject_GameKey_Id);
-            info.mEffet = (E_KeyEffect)mTableData.GetInt(i, DataDefine.GameObject_GameKey_Id);
+            info.mEffectId= mTableData.GetInt(i, DataDefine.GameObject_GameKey_EffectId);
+            info.mEffet = (E_KeyEffect)mTableData.GetInt(i, DataDefine.GameObject_GameKey_Effect);
             info.mName = mTableData.GetStr(i, DataDefine.GameObject_GameKey_Name);
             info.mDesc = mTableData.GetStr(i, DataDefine.GameObject_GameKey_Desc);
             info.mTexture = mTableData.GetStr(i, DataDefine.GameObject_GameKey_Texture);
+            info.mEffectObjName = mTableData.GetStr(i, DataDefine.GameObject_GameKey_EffectObjName);
             info.mObjName = mTableData.GetStr(i, DataDefine.GameObject_GameKey_ObjName);
             
             mDicInfo[info.mId] = info;
             mDicInfoName[info.mObjName] = info;
+            mDicInfoEffectObjName[info.mEffectObjName] = info;
             allGameKey.Add(info);
         }
     }
@@ -450,6 +457,12 @@ public class TableGameKey : TableData
     {
         if (null != mDicInfo && mDicInfo.ContainsKey(_id))
             return mDicInfo[_id];
+        return null;
+    }
+    public ObjTabletGameKey GetTabletGameKeyByEffectObjName(string _objName)
+    {
+        if (null != mDicInfoEffectObjName && mDicInfoEffectObjName.ContainsKey(_objName))
+            return mDicInfoEffectObjName[_objName];
         return null;
     }
     public ObjTabletGameKey GetTabletGameKeyByObjName(string _objName)

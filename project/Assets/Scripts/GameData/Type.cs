@@ -13,13 +13,23 @@ public enum E_KeyEffect
     E_Unlock,
     E_Creat,
 }
-
-public enum E_Prop
+public enum E_PropState
 {
-    E_PlaneKey,
+    E_UnPicked,
+    E_PickedUnUsed,
+    E_PickedUsed,
+}
+public enum E_Trigger
+{
+    E_None,
     E_RoomKey,
+    E_PlaneKey,
     E_LiftKey,
     E_Seed,
+    E_Plane,
+    E_Room,
+    E_Lift,
+    E_Pot,
 }
 public enum E_PlatForm
 {

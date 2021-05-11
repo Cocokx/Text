@@ -148,6 +148,16 @@ public class ClientTableDataManager
         }
         return mTableGameKey.GetTabletGameKeyById(_id);
     }
+    public TableGameKey.ObjTabletGameKey GetTabletGameKeyByEffectObjName(string _objName)
+    {
+        if (null == mTableGameKey)
+        {
+            mTableGameKey = new TableGameKey();
+            mTableGameKey.ReadTable();
+            mTableGameKey.ParseData();
+        }
+        return mTableGameKey.GetTabletGameKeyByEffectObjName(_objName);
+    }
     public TableGameKey.ObjTabletGameKey GetTabletGameKeyByObjName(string _objName)
     {
         if (null == mTableGameKey)

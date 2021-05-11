@@ -14,6 +14,9 @@ public class SceneInfoManager
             return instance;
         }
     }
+    bool mIsLogicBlock;
+    bool mHasUiPopup;
+    bool mIsPause;
     bool mIsInScene1;
     bool mIsInScene2;
     public string Scene1 = "Scene01";
@@ -57,5 +60,29 @@ public class SceneInfoManager
             IsInScene1 = true;
         }
         
+    }
+    
+    public bool LogicBlock
+    {
+        get { return mIsLogicBlock; }
+        set { mIsLogicBlock = value; }
+    }
+
+    public bool HasUiPopup
+    {
+        get { return mHasUiPopup; }
+        set { mHasUiPopup = value; }
+    }
+    public bool IsPause
+    {
+        get {
+                if (!HasUiPopup && !mIsLogicBlock)
+                { 
+                    mIsPause = false;
+                    return mIsPause;
+                }
+                return true;
+        }
+        set { mIsPause = value; }
     }
 }
