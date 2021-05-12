@@ -7,6 +7,7 @@ public class GameDataManager
     //public List<TableGameKey.ObjTabletGameKey> mListUnPickProp;
     //已经捡起来的物品，true说明被使用，在场景，false说明未使用，在背包
     public  Dictionary<TableGameKey.ObjTabletGameKey,E_PropState> mDicProp;
+    public Vector3 playerPos;
     static GameDataManager instance;
     public static GameDataManager Instance
     {

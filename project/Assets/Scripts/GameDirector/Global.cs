@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class GameDirector : MonoBehaviour
+public class Global : MonoBehaviour
 {
-    public static GameDirector Instance = null;
+    public static Global Instance = null;
 
     private void Awake()
     {
@@ -16,17 +15,14 @@ public class GameDirector : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        SceneInfoManager.Instance.IsInScene1 = true;
-        GameDataManager.Instance.InitProp();
     }
-    private void Start()
+    public void DoSomeThings()
     {
-        
+        Debug.Log("DoSomeThings");
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        
+        Debug.Log("Start");
     }
 }

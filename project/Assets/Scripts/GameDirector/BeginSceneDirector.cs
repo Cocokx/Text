@@ -15,6 +15,7 @@ public class BeginSceneDirector : MonoBehaviour
     {
 
     }
+    
     public void InitScene()
     {
         Dictionary<TableGameKey.ObjTabletGameKey, E_PropState> mDicProp = new Dictionary<TableGameKey.ObjTabletGameKey, E_PropState>();

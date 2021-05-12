@@ -19,9 +19,10 @@ public class SceneInfoManager
     bool mIsPause;
     bool mIsInScene1;
     bool mIsInScene2;
-    public string Scene1 = "Scene01";
-    public string Scene2 = "Scene02";
+    public string Scene1 = "NormalScene";
+    public string Scene2 = "PastScene";
     public string nextSceneName;
+    public bool isPassThr;
     public bool IsInScene1
     {
         get { return mIsInScene1; }
@@ -50,6 +51,13 @@ public class SceneInfoManager
     }
     public void LoadScene()
     {
+        if (GameDataManager.Instance.playerPos == null)
+            GameDataManager.Instance.playerPos = new Vector3();
+        GameDataManager.Instance.playerPos = Player.Instance.transform.localPosition;
+        isPassThr = true;
+        Debug.Log("pos" + GameDataManager.Instance.playerPos);
+
+
         SceneManager.LoadSceneAsync(nextSceneName);
         if (IsInScene1)
         {

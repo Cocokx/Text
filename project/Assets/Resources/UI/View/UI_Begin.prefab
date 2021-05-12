@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2170628861884456849}
   - component: {fileID: 7540499274774568224}
   - component: {fileID: 8935613990563306578}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Button (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -623, y: 175}
+  m_AnchoredPosition: {x: -881, y: 512}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2170628861884456849
@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 5285783993275801148}
   - component: {fileID: 2587424688743042105}
   - component: {fileID: 3592236342867775570}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 8275848309184788015}
   - component: {fileID: 5913544965891141401}
   - component: {fileID: 1196439033522576964}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,7 +287,7 @@ GameObject:
   - component: {fileID: 1442534578928300415}
   - component: {fileID: 5679288180459849987}
   - component: {fileID: 4474759131739709901}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -311,7 +311,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -631, y: 305}
+  m_AnchoredPosition: {x: 882, y: 521}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1442534578928300415
@@ -405,7 +405,7 @@ GameObject:
   - component: {fileID: 5902195422055722346}
   - component: {fileID: 4355861761487133570}
   - component: {fileID: 1090201541291731509}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -479,7 +479,7 @@ GameObject:
   - component: {fileID: 8787783843840156600}
   - component: {fileID: 8787783843840156602}
   - component: {fileID: 8787783843840156603}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: MainPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -557,7 +557,7 @@ GameObject:
   - component: {fileID: 8787783844257390874}
   - component: {fileID: 8787783844257390875}
   - component: {fileID: 8787783844257390871}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: UI_Begin
   m_TagString: Untagged
   m_Icon: {fileID: 0}

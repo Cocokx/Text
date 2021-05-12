@@ -9,19 +9,8 @@ using UnityEngine.AI;
 /// 挂载在角色身上的脚本，用来控制状态机器类
 /// </summary>
 /// 
-public class Player : MonoBehaviour
+public class Player : MonoSingleton<Player>
 {
-    public static Player Instance = null;
-    private void Awake()
-    {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
     public NavMeshAgent agent;
     //private Animation ani;
     public Animator animator;
@@ -35,11 +24,13 @@ public class Player : MonoBehaviour
     public bool canClimb = true;
     public CinemachineVirtualCamera cv;
     public Transform mLift3;
+    
     //public Camera mainCamera;
     void Start()
     {
         //mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
         agent = GetComponent<NavMeshAgent>();
+        agent.enabled = false;
         //ani = GetComponent<Animation>();
         animator = GetComponent<Animator>();
         IdleState idle = new IdleState(0, this);
@@ -49,14 +40,32 @@ public class Player : MonoBehaviour
         machine = new StateMachine(idle);
         machine.AddState(walk);
         machine.AddState(climb);
+        InitPlayer();
+        agent.enabled = true;
     }
-
+    public void InitPlayer()
+    {
+        Debug.Log("play1");
+        if (!SceneInfoManager.Instance.isPassThr)
+            return;
+        if (null != GameDataManager.Instance.playerPos)
+        {
+            //agent.isStopped = true;
+            Debug.Log("play" + GameDataManager.Instance.playerPos);
+            transform.localPosition = GameDataManager.Instance.playerPos;
+        }
+    }
     void Update()
     {
         //Debug.Log(SceneInfoManager.Instance.IsPause);
         ////鼠标左键点击  
         if (SceneInfoManager.Instance.IsPause)
+        {
+            ps = E_PlayerState.E_Idle;
+            machine.TranslateState((int)ps);
             return;
+        }
+            
         if (Input.GetMouseButtonDown(0))
         {
             //摄像机到点击位置的的射线  
@@ -64,7 +73,6 @@ public class Player : MonoBehaviour
             //Debug.Log(ray);
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            Debug.Log(Physics.Raycast(ray, out hit));
             if (Physics.Raycast(ray, out hit))
             {
                 Debug.LogError("------hit----:");
@@ -140,8 +148,9 @@ public class Player : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "LiftOpen")
+        if (other.gameObject.name == "LiftTrigger")
         {
+            UIManager.Instance.CreateUIViewInstance<UI_Lift>();
         }
         if (other.gameObject.name == "LeftCamTrigger2")
         {

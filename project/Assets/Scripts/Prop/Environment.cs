@@ -54,10 +54,12 @@ public class Environment : MonoSingleton<Environment>
     }
     public void AppearKey(TableGameKey.ObjTabletGameKey _info)
     {
+        Debug.Log("出现Key");
         if (keys == null)
             InitKey();
         if (null != keys && keys.Length > 0)
         {
+            Debug.Log("存在key");
             for (int i = 0; i < keys.Length; i++)
             {
                 Key keyItem = keys[i];

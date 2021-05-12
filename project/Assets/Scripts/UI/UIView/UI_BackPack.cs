@@ -119,7 +119,7 @@ public class UI_BackPack : UI_PopUpView
             {
                 Environment.Instance.AppearProp(mWillChooseGameKey);
             }
-            Environment.Instance.DisAppearKeys(mWillChooseGameKey);
+            //Environment.Instance.DisAppearKeys(mWillChooseGameKey);
 
         }
         mWillChooseGameKey = null;
