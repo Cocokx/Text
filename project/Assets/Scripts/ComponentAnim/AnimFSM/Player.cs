@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Cinemachine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -32,10 +33,11 @@ public class Player : MonoBehaviour
     private Vector3 linkEnd;//OffMeshLink的结束点  
     private Quaternion linkRotate;//OffMeshLink的旋转  
     public bool canClimb = true;
-    
-    
+    public CinemachineVirtualCamera cv;
+    //public Camera mainCamera;
     void Start()
     {
+        //mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
         agent = GetComponent<NavMeshAgent>();
         //ani = GetComponent<Animation>();
         animator = GetComponent<Animator>();
@@ -57,12 +59,15 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             //摄像机到点击位置的的射线  
+            //Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            //Debug.Log(ray);
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            Debug.Log("鼠标点击");
+            Debug.Log(Physics.Raycast(ray, out hit));
             if (Physics.Raycast(ray, out hit))
             {
-                Debug.LogError("------hit----:" + hit.collider.gameObject.name);
+                Debug.LogError("------hit----:");
+                Debug.LogError(hit.collider.gameObject.name);
                 Key key = hit.collider.gameObject.GetComponent<Key>();
                 if (null != key && key.ID == (int)triggerType)
                 {
