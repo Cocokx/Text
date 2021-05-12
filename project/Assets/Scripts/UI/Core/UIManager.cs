@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         m_dicViewType.Add(typeof(UI_Begin), "UI_Begin");
+        m_dicViewType.Add(typeof(UI_Lift), "UI_Lift");
         m_dicViewType.Add(typeof(UI_BackPack), "UI_BackPack");
     }
     public T CreateUIViewInstance<T>() where T : UIView

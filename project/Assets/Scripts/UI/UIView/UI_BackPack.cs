@@ -117,7 +117,7 @@ public class UI_BackPack : UI_PopUpView
             }
             else if(mWillChooseGameKey.mEffet == E_KeyEffect.E_Unlock)
             {
-
+                Environment.Instance.AppearProp(mWillChooseGameKey);
             }
             Environment.Instance.DisAppearKeys(mWillChooseGameKey);
 

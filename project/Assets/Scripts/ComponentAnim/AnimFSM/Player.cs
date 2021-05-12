@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
     private Quaternion linkRotate;//OffMeshLink的旋转  
     public bool canClimb = true;
     public CinemachineVirtualCamera cv;
+    public Transform mLift3;
     //public Camera mainCamera;
     void Start()
     {
@@ -100,7 +101,7 @@ public class Player : MonoBehaviour
                 ps = E_PlayerState.E_Idle;
             }
         }
-        Debug.Log(agent.isOnOffMeshLink);
+        Debug.Log("是否碰到Link"+agent.isOnOffMeshLink);
         if (agent.isOnOffMeshLink )
         {
             Debug.Log(agent.currentOffMeshLinkData.offMeshLink.area);
@@ -111,6 +112,11 @@ public class Player : MonoBehaviour
                 agent.isStopped = true;
                 ps = E_PlayerState.E_Climb;
                 machine.TranslateState((int)ps);
+
+            }
+            if (agent.currentOffMeshLinkData.offMeshLink.area == 4)
+            {
+                agent.CompleteOffMeshLink();
 
             }
         }
@@ -134,6 +140,9 @@ public class Player : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.name == "LiftOpen")
+        {
+        }
         if (other.gameObject.name == "LeftCamTrigger2")
         {
             Debug.Log("LeftCamTrigger2");
@@ -195,5 +204,9 @@ public class Player : MonoBehaviour
         {
             CameraManager.Instance.ChangeCam(CameraManager.ECameraState.ECamNormal);
         }
+    }
+    public void SetPlayerPosition(Vector3 tar)
+    {
+        agent.SetDestination(tar);
     }
 }

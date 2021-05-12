@@ -7,6 +7,7 @@ public class Environment : MonoSingleton<Environment>
     //GameObject mSceneProp;
     Prop[] prop;
     Key[] keys;
+    public List<Transform> Lift;
     // Start is called before the first frame update
     private void Start()
     {
