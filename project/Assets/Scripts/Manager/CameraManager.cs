@@ -4,32 +4,38 @@ using UnityEngine;
 using Cinemachine;
 public class CameraManager : MonoSingleton<CameraManager>
 {
-    enum ECameraState
+    public enum ECameraState
     {
         ENone,
         ECamNormal,
-        ECamLeftSecondFloor,
+        ECamLeft2,
+        ECamLeft3,
+        ECamLeft4,
+        ECamLeft5,
         ECamRightFourFloor,
         ECamVeh,
     }
     private InuStateMachine<ECameraState> mFSM;
-    CinemachineVirtualCamera camNormal; 
-    CinemachineVirtualCamera camRightFourFloor; 
-    CinemachineVirtualCamera camLeftSecondFloor;
-    CinemachineVirtualCamera camVeh;
+    public CinemachineVirtualCamera camNormal;
+    //public CinemachineVirtualCamera camRightFourFloor;
+    public CinemachineVirtualCamera camLeft2;
+    public CinemachineVirtualCamera camLeft3;
+    public CinemachineVirtualCamera camLeft4;
+    public CinemachineVirtualCamera camLeft5;
+    public CinemachineVirtualCamera camVeh;
     ECameraState cam = ECameraState.ECamNormal;
     // Start is called before the first frame update
     void Start()
     {
         InitFSM();
-        camNormal = GameObject.Find("CM Normal").GetComponent<CinemachineVirtualCamera>();
-        camLeftSecondFloor = GameObject.Find("CM LeftSecondFloor").GetComponent<CinemachineVirtualCamera>();
-        camRightFourFloor = GameObject.Find("CM RightFourFloor").GetComponent<CinemachineVirtualCamera>();
-        camVeh = GameObject.Find("CM Veh").GetComponent<CinemachineVirtualCamera>();
+        //camNormal = transform.Find("CM Normal").GetComponent<CinemachineVirtualCamera>();
+        //camLeftSecondFloor = transform.Find("CM LeftSecondFloor").GetComponent<CinemachineVirtualCamera>();
+        //camRightFourFloor = transform.Find("CM RightFourFloor").GetComponent<CinemachineVirtualCamera>();
+        //camVeh = transform.Find("CM Veh").GetComponent<CinemachineVirtualCamera>();
         //camNormal = transform.GetChild(0).GetComponent<CinemachineVirtualCamera>();
         //camLeft = transform.GetChild(1).GetComponent<CinemachineVirtualCamera>();
         //camRight = transform.GetChild(2).GetComponent<CinemachineVirtualCamera>();
-        mFSM.ChangeState(ECameraState.ECamNormal);
+        //mFSM.ChangeState(ECameraState.ECamNormal);
     }
 
     // Update is called once per frame
@@ -42,27 +48,19 @@ public class CameraManager : MonoSingleton<CameraManager>
     {
         mFSM = new InuStateMachine<ECameraState>();
         mFSM.AddState(ECameraState.ECamNormal, new StateNormal(mFSM, ECameraState.ECamNormal, this));
-        mFSM.AddState(ECameraState.ECamRightFourFloor, new StateRightFourFloor(mFSM, ECameraState.ECamNormal, this));
-        mFSM.AddState(ECameraState.ECamLeftSecondFloor, new StateLeftSecondFloor(mFSM, ECameraState.ECamNormal, this));
+        mFSM.AddState(ECameraState.ECamRightFourFloor, new StateRightFourFloor(mFSM, ECameraState.ECamRightFourFloor, this));
+        mFSM.AddState(ECameraState.ECamLeft2, new StateLeft2(mFSM, ECameraState.ECamLeft2, this));
+        mFSM.AddState(ECameraState.ECamLeft3, new StateLeft3(mFSM, ECameraState.ECamLeft3, this));
+        mFSM.AddState(ECameraState.ECamLeft4, new StateLeft4(mFSM, ECameraState.ECamLeft4, this));
+        mFSM.AddState(ECameraState.ECamLeft5, new StateLeft5(mFSM, ECameraState.ECamLeft5, this));
         mFSM.AddState(ECameraState.ECamVeh, new StateVeh(mFSM, ECameraState.ECamVeh, this));
-
-    }
-    public void ChangeNormal()
-    {
         mFSM.ChangeState(ECameraState.ECamNormal);
     }
-    public void ChangeRightFourFloor()
+    public void ChangeCam(ECameraState state)
     {
-            mFSM.ChangeState(ECameraState.ECamRightFourFloor);
+        mFSM.ChangeState(state);
     }
-    public void ChangeLeftSecondFloor()
-    {
-            mFSM.ChangeState(ECameraState.ECamLeftSecondFloor);
-    }
-    public void ChangeVeh()
-    {
-        mFSM.ChangeState(ECameraState.ECamVeh);
-    }
+    
     class StateBase : InuStateMachine<ECameraState>.InuState
     {
         protected CameraManager mInit;
@@ -91,8 +89,10 @@ public class CameraManager : MonoSingleton<CameraManager>
             base.EnterState();
             mInit.cam = ECameraState.ECamNormal;
             mInit.camNormal.Priority = 100;
-            mInit.camRightFourFloor.Priority = 10;
-            mInit.camLeftSecondFloor.Priority = 10;
+            mInit.camLeft3.Priority = 10;
+            mInit.camLeft2.Priority = 10;
+            mInit.camLeft4.Priority = 10;
+            mInit.camLeft5.Priority = 10;
             mInit.camVeh.Priority = 10;
 
         }
@@ -110,9 +110,9 @@ public class CameraManager : MonoSingleton<CameraManager>
         {
             base.EnterState();
             mInit.cam = ECameraState.ECamRightFourFloor;
-            mInit.camRightFourFloor.Priority = 100;
+            //mInit.camRightFourFloor.Priority = 100;
             mInit.camNormal.Priority = 10;
-            mInit.camLeftSecondFloor.Priority = 10;
+            mInit.camLeft2.Priority = 10;
             mInit.camVeh.Priority = 10;
         }
         public override void UpdateState()
@@ -120,18 +120,83 @@ public class CameraManager : MonoSingleton<CameraManager>
             base.UpdateState();
         }
     }
-    class StateLeftSecondFloor : StateBase
+    class StateLeft2 : StateBase
     {
-        public StateLeftSecondFloor(InuStateMachine<ECameraState> fsm, ECameraState stateName, CameraManager init)
+        public StateLeft2(InuStateMachine<ECameraState> fsm, ECameraState stateName, CameraManager init)
              : base(fsm, stateName, init)
         { }
         public override void EnterState()
         {
             base.EnterState();
-            mInit.cam = ECameraState.ECamLeftSecondFloor;
-            mInit.camLeftSecondFloor.Priority = 100;
+            Debug.Log("aa");
+            mInit.camLeft2.Priority = 100;
+            mInit.camLeft3.Priority = 10;
             mInit.camNormal.Priority = 10;
-            mInit.camRightFourFloor.Priority = 10;
+            mInit.camLeft4.Priority = 10;
+            mInit.camLeft5.Priority = 10;
+            mInit.camVeh.Priority = 10;
+        }
+        public override void UpdateState()
+        {
+            base.UpdateState();
+        }
+    }
+    class StateLeft3 : StateBase
+    {
+        public StateLeft3(InuStateMachine<ECameraState> fsm, ECameraState stateName, CameraManager init)
+             : base(fsm, stateName, init)
+        { }
+        public override void EnterState()
+        {
+            base.EnterState();
+            Debug.Log("3楼");
+            mInit.camLeft2.Priority = 10;
+            mInit.camLeft3.Priority = 100;
+            mInit.camNormal.Priority = 10;
+            mInit.camLeft4.Priority = 10;
+            mInit.camLeft5.Priority = 10;
+            mInit.camVeh.Priority = 10;
+        }
+        public override void UpdateState()
+        {
+            base.UpdateState();
+        }
+    }
+    class StateLeft4 : StateBase
+    {
+        public StateLeft4(InuStateMachine<ECameraState> fsm, ECameraState stateName, CameraManager init)
+             : base(fsm, stateName, init)
+        { }
+        public override void EnterState()
+        {
+            base.EnterState();
+            Debug.Log("aa");
+            mInit.camLeft2.Priority = 10;
+            mInit.camLeft3.Priority = 10;
+            mInit.camNormal.Priority = 10;
+            mInit.camLeft4.Priority = 100;
+            mInit.camLeft5.Priority = 10;
+            mInit.camVeh.Priority = 10;
+        }
+        public override void UpdateState()
+        {
+            base.UpdateState();
+        }
+    }
+    class StateLeft5 : StateBase
+    {
+        public StateLeft5(InuStateMachine<ECameraState> fsm, ECameraState stateName, CameraManager init)
+             : base(fsm, stateName, init)
+        { }
+        public override void EnterState()
+        {
+            base.EnterState();
+            Debug.Log("aa");
+            mInit.camLeft2.Priority = 10;
+            mInit.camLeft3.Priority = 10;
+            mInit.camNormal.Priority = 10;
+            mInit.camLeft4.Priority = 10;
+            mInit.camLeft5.Priority = 100;
             mInit.camVeh.Priority = 10;
         }
         public override void UpdateState()
@@ -147,11 +212,13 @@ public class CameraManager : MonoSingleton<CameraManager>
         public override void EnterState()
         {
             base.EnterState();
-            mInit.cam = ECameraState.ECamLeftSecondFloor;
-            mInit.camVeh.Priority = 100;
+            mInit.cam = ECameraState.ECamVeh;
             mInit.camNormal.Priority = 10;
-            mInit.camRightFourFloor.Priority = 10;
-            mInit.camLeftSecondFloor.Priority = 10;
+            mInit.camLeft3.Priority = 10;
+            mInit.camLeft2.Priority = 10;
+            mInit.camLeft4.Priority = 10;
+            mInit.camLeft5.Priority = 10;
+            mInit.camVeh.Priority = 100;
         }
         public override void UpdateState()
         {

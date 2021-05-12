@@ -134,10 +134,31 @@ public class Player : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.name== "RightCamTrigger")
+        if (other.gameObject.name == "LeftCamTrigger2")
         {
-            Debug.Log("RightCamTrigger");
-            CameraManager.Instance.ChangeLeftSecondFloor();
+            Debug.Log("LeftCamTrigger2");
+            CameraManager.Instance.ChangeCam(CameraManager.ECameraState.ECamLeft2);
+        }
+        if (other.gameObject.name == "LeftCamTrigger3")
+        {
+            Debug.Log("LeftCamTrigger3");
+            CameraManager.Instance.ChangeCam(CameraManager.ECameraState.ECamLeft3);
+        }
+        if (other.gameObject.name == "LeftCamTrigger4")
+        {
+            Debug.Log("LeftCamTrigger4");
+            CameraManager.Instance.ChangeCam(CameraManager.ECameraState.ECamLeft4);
+        }
+        if (other.gameObject.name == "LeftCamTrigger5")
+        {
+            Debug.Log("LeftCamTrigger5");
+            CameraManager.Instance.ChangeCam(CameraManager.ECameraState.ECamLeft5);
+        }
+        if (other.gameObject.name == "DoorTrigger")
+        {
+            Debug.Log("DoorTrigger");
+            CameraManager.Instance.ChangeCam(CameraManager.ECameraState.ECamNormal);
+            transform.parent = null;
         }
         if (other.gameObject.GetComponent<Key>() != null)
         {
@@ -167,9 +188,12 @@ public class Player : MonoBehaviour
             triggerType = E_Trigger.E_None;
             Debug.Log("triggerType" + triggerType);
         }
-        if (other.gameObject.name == "RightCamTrigger")
+        if (other.gameObject.name == "LeftCamTrigger2"
+            || other.gameObject.name == "LeftCamTrigger3"
+            ||other.gameObject.name == "LeftCamTrigger4"
+            ||   other.gameObject.name == "LeftCamTrigger5")
         {
-            CameraManager.Instance.ChangeNormal();
+            CameraManager.Instance.ChangeCam(CameraManager.ECameraState.ECamNormal);
         }
     }
 }
