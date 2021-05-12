@@ -134,6 +134,11 @@ public class Player : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        if(other.gameObject.name== "RightCamTrigger")
+        {
+            Debug.Log("RightCamTrigger");
+            CameraManager.Instance.ChangeLeftSecondFloor();
+        }
         if (other.gameObject.GetComponent<Key>() != null)
         {
             triggerType = (E_Trigger)other.gameObject.GetComponent<Key>().ID;
@@ -161,6 +166,10 @@ public class Player : MonoBehaviour
         {
             triggerType = E_Trigger.E_None;
             Debug.Log("triggerType" + triggerType);
+        }
+        if (other.gameObject.name == "RightCamTrigger")
+        {
+            CameraManager.Instance.ChangeNormal();
         }
     }
 }
