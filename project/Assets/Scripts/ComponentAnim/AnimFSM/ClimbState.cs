@@ -40,11 +40,6 @@ public class ClimbState : StateTemplate<Player>
         {
             if (Mathf.Abs(owner.transform.position.y - linkEnd.y) > 1.0f)
             {
-                //DOTween.To(() => owner.transform.position, x => owner.transform.position = x, linkEnd, 1);
-                //owner.transform.position = movingValue;
-                //owner.transform.position = Vector3.SmoothDamp(owner.transform.position, linkEnd,ref0,0,0);
-                //owner.transform.position = Vector3.Lerp(owner.transform.position, linkEnd, Time.deltaTime);
-                //owner.transform.DOMove(new Vector3(1, 1, 1), 2);
                 owner.transform.DOMove(linkEnd, 1).SetSpeedBased();
                 owner.transform.rotation = linkRotate;
             }
