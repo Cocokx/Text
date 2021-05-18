@@ -47,6 +47,8 @@ public class GameDirector : MonoBehaviour
         mFSM.AddState(EGameState.EGameStart, new StateStartGame(mFSM, EGameState.EGameStart, this));
         mFSM.AddState(EGameState.ESwitchScene, new StateSwitchScene(mFSM, EGameState.ESwitchScene, this));
         mFSM.AddState(EGameState.ERoom1, new StateEnterRoom1(mFSM, EGameState.ERoom1, this));
+        mFSM.AddState(EGameState.ERoom2, new StateEnterRoom2(mFSM, EGameState.ERoom2, this));
+        mFSM.AddState(EGameState.ERoom3, new StateEnterRoom3(mFSM, EGameState.ERoom3, this));
         mFSM.ChangeState(EGameState.EGameStart);
     }
     public void ChangeTime()

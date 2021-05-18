@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PastScene.unity
     guid: 7408ad96002c5314299f5a8df92ac324
+  - enabled: 1
+    path: Assets/Scenes/Room1.unity
+    guid: db960a262dec50646b94c172d5379ca0
   m_configObjects: {}

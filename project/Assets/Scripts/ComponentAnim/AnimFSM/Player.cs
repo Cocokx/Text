@@ -39,8 +39,9 @@ public class Player : MonoBehaviour
         //public Camera mainCamera;
     void Start()
     {
-        //mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
-        agent = GetComponent<NavMeshAgent>();
+        InitPlayer();
+           //mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
+           agent = GetComponent<NavMeshAgent>();
         agent.enabled = false;
         //ani = GetComponent<Animation>();
         animator = GetComponent<Animator>();
@@ -52,8 +53,20 @@ public class Player : MonoBehaviour
         machine.AddState(walk);
         machine.AddState(climb);
         agent.enabled = true;
+        
     }
-    
+    public void InitPlayer()
+    {
+        Debug.Log("play1");
+        if (!GameDirector.Instance.isPassThr)
+            return;
+        if (null != GameDataManager.Instance.playerPos)
+        {
+            //agent.isStopped = true;
+            Debug.Log("play" + GameDataManager.Instance.playerPos);
+            Player.Instance.transform.localPosition = GameDataManager.Instance.playerPos;
+        }
+    }
     void Update()
     {
         //Debug.Log(SceneInfoManager.Instance.IsPause);
