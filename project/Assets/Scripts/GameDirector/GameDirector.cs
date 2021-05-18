@@ -99,6 +99,7 @@ public class GameDirector : MonoBehaviour
         {
             base.EnterState();
             GameDataManager.Instance.InitSceneName();
+            GameDataManager.Instance.InitPassword();
             mInit.ship = FindObjectOfType<Ship>();
             CamManager.Instance.ChangeCam(ECameraState.ECamTrackShip);
             UIManager.Instance.CreateUIViewInstance<UI_Begin>();
@@ -152,6 +153,7 @@ public class GameDirector : MonoBehaviour
         public override void EnterState()
         {
             base.EnterState();
+            //mInit.isPassThr = true;
             SceneInfoManager.Instance.nextScene = E_Scene.E_Nor;
             SceneManager.LoadSceneAsync(GameDataManager.Instance.mScene[E_Scene.E_Room1]);
         }

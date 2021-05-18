@@ -17,14 +17,29 @@ public class CamManager : MonoSingleton<CamManager>
         cams = transform.GetComponentsInChildren<Cam>(true);
         for (int i=0; i < cams.Length; i++)
         {
-            if(cams[i].state == state)
+            if(null!= cams[i].transform.GetComponent<CinemachineVirtualCamera>())
             {
-                cams[i].transform.GetComponent<Cinemachine.CinemachineVirtualCamera>().Priority = 100;
+                if (cams[i].state == state)
+                {
+                    cams[i].transform.GetComponent<CinemachineVirtualCamera>().Priority = 100;
+                }
+                else
+                {
+                    cams[i].transform.GetComponent<CinemachineVirtualCamera>().Priority = 10;
+                }
             }
-            else
+            else if(null!= cams[i].transform.GetComponent<CinemachineFreeLook>())
             {
-                cams[i].transform.GetComponent<Cinemachine.CinemachineVirtualCamera>().Priority = 10;
+                if (cams[i].state == state)
+                {
+                    cams[i].transform.GetComponent<CinemachineFreeLook>().Priority = 100;
+                }
+                else
+                {
+                    cams[i].transform.GetComponent<CinemachineFreeLook>().Priority = 10;
+                }
             }
+            
         }
     }
 }

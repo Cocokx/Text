@@ -85,6 +85,7 @@ public class Player : MonoBehaviour
             //Debug.Log(ray);
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
+            //Debug.LogError("------ButtonDown----:");
             if (Physics.Raycast(ray, out hit))
             {
                 Debug.LogError("------hit----:");
@@ -96,6 +97,15 @@ public class Player : MonoBehaviour
                 {
                     Environment.Instance.DisAppearKeys(ClientTableDataManager.Instance.GetTabletGameKeyById(key.ID));
                     GameDataManager.Instance.PickProp(ClientTableDataManager.Instance.GetTabletGameKeyById(key.ID));
+                }
+                else if (hit.collider.gameObject.name=="Gift" && triggerType == E_Trigger.E_Gift)
+                {
+                    CamManager.Instance.ChangeCam(ECameraState.ECamRoomFree);
+                    UIManager.Instance.CreateUIViewInstance<UI_BackRoom>();
+                }
+                else if (hit.collider.gameObject.name == "Password" && triggerType == E_Trigger.E_Password)
+                {
+                    UIManager.Instance.CreateUIViewInstance<UI_Password>();
                 }
                 else
                     agent.SetDestination(hit.point);
@@ -190,6 +200,12 @@ public class Player : MonoBehaviour
                 CamManager.Instance.ChangeCam(ECameraState.ECamNormal);
                 transform.parent = null;
                 break;
+            case "Gift":
+                triggerType = E_Trigger.E_Gift;
+                break;
+            case "Password":
+                triggerType = E_Trigger.E_Password;
+                break;
         }
         if (other.gameObject.GetComponent<Key>() != null)
         {
@@ -217,12 +233,13 @@ public class Player : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.GetComponent<Key>() != null
-            || other.gameObject.GetComponent<Prop>() != null)
-        {
-            triggerType = E_Trigger.E_None;
-            Debug.Log("triggerType" + triggerType);
-        }
+        triggerType = E_Trigger.E_None;
+        //if (other.gameObject.GetComponent<Key>() != null
+        //    || other.gameObject.GetComponent<Prop>() != null)
+        //{
+        //    triggerType = E_Trigger.E_None;
+        //    Debug.Log("triggerType" + triggerType);
+        //}
         if (other.gameObject.name == "LiftTrigger")
         {
             other.transform.GetChild(0).gameObject.SetActive(false);
