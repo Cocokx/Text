@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-
-public class BeginSceneDirector : MonoBehaviour
+using UnityEngine.Playables;
+public class BeginSceneDirector : MonoSingleton<BeginSceneDirector>
 {
+    public PlayableDirector playableDirector;
+    Cinemachine.CinemachineDollyCart cart;
     // Start is called before the first frame update
     void Start()
     {
         InitScene();
+        if(SceneInfoManager.Instance.IsInScene1)
+            InitTimeLine();
         //Debug.Log("道具"+GameDataManager.Instance.mListUsedPropId.Count);
     }
 
@@ -15,7 +19,17 @@ public class BeginSceneDirector : MonoBehaviour
     {
 
     }
-    
+    public void InitTimeLine()
+    {
+        playableDirector = FindObjectOfType<PlayableDirector>();
+        cart = FindObjectOfType<Cinemachine.CinemachineDollyCart>();
+        cart.m_Speed = 0;
+    }
+    public void PlayTimeline()
+    {
+        playableDirector.Play();
+        cart.m_Speed = 1;
+    }
     public void InitScene()
     {
         Dictionary<TableGameKey.ObjTabletGameKey, E_PropState> mDicProp = new Dictionary<TableGameKey.ObjTabletGameKey, E_PropState>();

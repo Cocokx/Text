@@ -2,17 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Environment : MonoSingleton<Environment>
 {
     //GameObject mSceneProp;
     Prop[] prop;
     Key[] keys;
+    public Room[] rooms;
     public List<Transform> Lift;
+    
     // Start is called before the first frame update
     private void Start()
     {
+        
         InitProp();
         InitKey();
+        InitRoom();
+    }
+    void InitRoom()
+    {
+        rooms = FindObjectsOfType<Room>();
     }
     public void InitProp()
     {

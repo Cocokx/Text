@@ -24,7 +24,7 @@ public class UI_PopUpView : UIView
     {
         SceneInfoManager.Instance.HasUiPopup = true;
         mRectMainPanel.transform.DOScale(mTargetSize, 0.3f).SetEase(mShowEase).OnComplete(AddMaskEffect);
-
+        Player.Instance.agent.isStopped = true;
         HideShowOtherUIView(true);
     }
     protected virtual void HideView()
@@ -38,6 +38,7 @@ public class UI_PopUpView : UIView
 
         HideShowOtherUIView(false);
         //游戏进程开始
+        Player.Instance.agent.isStopped = false;
         SceneInfoManager.Instance.HasUiPopup = false;
     }
     void AddMaskEffect()

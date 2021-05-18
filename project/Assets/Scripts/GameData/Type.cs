@@ -1,6 +1,15 @@
 ﻿using System;
 
-
+public enum ECameraState
+{
+    ECamNormal,
+    ECamLeft2,
+    ECamLeft3,
+    ECamLeft4,
+    ECamLeft5,
+    ECamTrackShip,
+    ECamTrackPlane,
+}
 public enum E_PlayerState
 {
     E_Idle,
@@ -18,6 +27,19 @@ public enum E_PropState
     E_UnPicked,
     E_PickedUnUsed,
     E_PickedUsed,
+}
+public enum E_RoomType
+{
+    E_RoomFloor1,
+    E_RoomFloor2,
+}
+public enum E_Scene
+{
+    E_Past,
+    E_Nor,
+    E_Room1,
+    E_Room2,
+    E_Room3,
 }
 public enum E_Trigger
 {

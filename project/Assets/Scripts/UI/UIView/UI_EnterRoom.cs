@@ -2,36 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class UI_Begin : UI_PopUpView
+public class UI_EnterRoom : UI_PopUpView
 {
     public Button mBtnClose;
-    public Button mBtnBackPack;
+    public Button mBtnEnter;
     protected override void InitEvent()
     {
         base.InitEvent();
         mBtnClose.onClick.AddListener(BtnConfirmClickHandler);
-        mBtnBackPack.onClick.AddListener(BtnBackHandler);
+        mBtnEnter.onClick.AddListener(BtnEnterClickHandler);
     }
     protected override void ShowView()
     {
         base.ShowView();
-        SceneInfoManager.Instance.HasUiPopup = false;
-        Player.Instance.agent.isStopped = false;
     }
     protected override void CloseView()
     {
         base.CloseView();
-        UIManager.Instance.CloseUIViewInstance<UI_Begin>();
+        UIManager.Instance.CloseUIViewInstance<UI_EnterRoom>();
     }
     void BtnConfirmClickHandler()
     {
-        GameDirector.Instance.ChangeTime();
-        //HideView();
+        HideView();
     }
-    void BtnBackHandler()
+    void BtnEnterClickHandler()
     {
-        UIManager.Instance.CreateUIViewInstance<UI_BackPack>();
-        //HideView();
+
+        HideView();
     }
 }
+

@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 /// <summary>
 /// PlayerCtrl
 /// 挂载在角色身上的脚本，用来控制状态机器类
 /// </summary>
 /// 
-public class Player : MonoSingleton<Player>
+public class Player : MonoBehaviour
 {
     public NavMeshAgent agent;
     //private Animation ani;
@@ -24,8 +25,18 @@ public class Player : MonoSingleton<Player>
     public bool canClimb = true;
     public CinemachineVirtualCamera cv;
     public Transform mLift3;
-    
-    //public Camera mainCamera;
+    public static Player Instance = null;
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        //DontDestroyOnLoad(gameObject);
+    }
+        //public Camera mainCamera;
     void Start()
     {
         //mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
@@ -40,21 +51,9 @@ public class Player : MonoSingleton<Player>
         machine = new StateMachine(idle);
         machine.AddState(walk);
         machine.AddState(climb);
-        InitPlayer();
         agent.enabled = true;
     }
-    public void InitPlayer()
-    {
-        Debug.Log("play1");
-        if (!SceneInfoManager.Instance.isPassThr)
-            return;
-        if (null != GameDataManager.Instance.playerPos)
-        {
-            //agent.isStopped = true;
-            Debug.Log("play" + GameDataManager.Instance.playerPos);
-            transform.localPosition = GameDataManager.Instance.playerPos;
-        }
-    }
+    
     void Update()
     {
         //Debug.Log(SceneInfoManager.Instance.IsPause);
@@ -63,9 +62,9 @@ public class Player : MonoSingleton<Player>
         {
             ps = E_PlayerState.E_Idle;
             machine.TranslateState((int)ps);
+            
             return;
         }
-            
         if (Input.GetMouseButtonDown(0))
         {
             //摄像机到点击位置的的射线  
@@ -78,6 +77,8 @@ public class Player : MonoSingleton<Player>
                 Debug.LogError("------hit----:");
                 Debug.LogError(hit.collider.gameObject.name);
                 Key key = hit.collider.gameObject.GetComponent<Key>();
+                if (hit.collider.CompareTag("UI"))
+                    return;
                 if (null != key && key.ID == (int)triggerType)
                 {
                     Environment.Instance.DisAppearKeys(ClientTableDataManager.Instance.GetTabletGameKeyById(key.ID));
@@ -100,16 +101,16 @@ public class Player : MonoSingleton<Player>
             float speed = velocityXZ.magnitude;
             if (speed > 0)
             {
-                Debug.Log("walk");
+                //Debug.Log("walk");
                 ps = E_PlayerState.E_Walk;
             }
             else
             {
-                Debug.Log("idle");
+                //Debug.Log("idle");
                 ps = E_PlayerState.E_Idle;
             }
         }
-        Debug.Log("是否碰到Link"+agent.isOnOffMeshLink);
+        //Debug.Log("是否碰到Link"+agent.isOnOffMeshLink);
         if (agent.isOnOffMeshLink )
         {
             Debug.Log(agent.currentOffMeshLinkData.offMeshLink.area);
@@ -148,35 +149,34 @@ public class Player : MonoSingleton<Player>
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "LiftTrigger")
+        switch (other.gameObject.name)
         {
-            UIManager.Instance.CreateUIViewInstance<UI_Lift>();
-        }
-        if (other.gameObject.name == "LeftCamTrigger2")
-        {
-            Debug.Log("LeftCamTrigger2");
-            CameraManager.Instance.ChangeCam(CameraManager.ECameraState.ECamLeft2);
-        }
-        if (other.gameObject.name == "LeftCamTrigger3")
-        {
-            Debug.Log("LeftCamTrigger3");
-            CameraManager.Instance.ChangeCam(CameraManager.ECameraState.ECamLeft3);
-        }
-        if (other.gameObject.name == "LeftCamTrigger4")
-        {
-            Debug.Log("LeftCamTrigger4");
-            CameraManager.Instance.ChangeCam(CameraManager.ECameraState.ECamLeft4);
-        }
-        if (other.gameObject.name == "LeftCamTrigger5")
-        {
-            Debug.Log("LeftCamTrigger5");
-            CameraManager.Instance.ChangeCam(CameraManager.ECameraState.ECamLeft5);
-        }
-        if (other.gameObject.name == "DoorTrigger")
-        {
-            Debug.Log("DoorTrigger");
-            CameraManager.Instance.ChangeCam(CameraManager.ECameraState.ECamNormal);
-            transform.parent = null;
+            case "LiftTrigger":
+                UIManager.Instance.CreateUIViewInstance<UI_Lift>();
+                other.transform.GetChild(0).gameObject.SetActive(true);
+                break;
+            case "PlaneTrigger":
+                UIManager.Instance.CreateUIViewInstance<UI_EnterRoom>();
+                break;
+            case "RoomTrigger":
+                UIManager.Instance.CreateUIViewInstance<UI_EnterRoom>();
+                break;
+            case "LeftCamTrigger2":
+                CamManager.Instance.ChangeCam(ECameraState.ECamLeft2);
+                break;
+            case "LeftCamTrigger3":
+                CamManager.Instance.ChangeCam(ECameraState.ECamLeft3);
+                break;
+            case "LeftCamTrigger4":
+                CamManager.Instance.ChangeCam(ECameraState.ECamLeft4);
+                break;
+            case "LeftCamTrigger5":
+                CamManager.Instance.ChangeCam(ECameraState.ECamLeft5);
+                break;
+            case "DoorTrigger":
+                CamManager.Instance.ChangeCam(ECameraState.ECamNormal);
+                transform.parent = null;
+                break;
         }
         if (other.gameObject.GetComponent<Key>() != null)
         {
@@ -193,6 +193,10 @@ public class Player : MonoSingleton<Player>
             Debug.Log("碰到" + other.gameObject.name);
             Debug.Log("triggerType" + triggerType);
         }
+        else if(other.gameObject.GetComponent<Room>() != null)
+        {
+            SceneInfoManager.Instance.nowScene = other.gameObject.GetComponent<Room>().type;
+        }
         else
         {
             //triggerType = E_Trigger.E_None;
@@ -206,12 +210,18 @@ public class Player : MonoSingleton<Player>
             triggerType = E_Trigger.E_None;
             Debug.Log("triggerType" + triggerType);
         }
-        if (other.gameObject.name == "LeftCamTrigger2"
-            || other.gameObject.name == "LeftCamTrigger3"
-            ||other.gameObject.name == "LeftCamTrigger4"
-            ||   other.gameObject.name == "LeftCamTrigger5")
+        if (other.gameObject.name == "LiftTrigger")
         {
-            CameraManager.Instance.ChangeCam(CameraManager.ECameraState.ECamNormal);
+            other.transform.GetChild(0).gameObject.SetActive(false);
+        }
+        switch (other.gameObject.name)
+        {
+            case "LeftCamTrigger2":
+            case "LeftCamTrigger3":
+            case "LeftCamTrigger4":
+            case "LeftCamTrigger5":
+                CamManager.Instance.ChangeCam(ECameraState.ECamNormal);
+                break;
         }
     }
     public void SetPlayerPosition(Vector3 tar)

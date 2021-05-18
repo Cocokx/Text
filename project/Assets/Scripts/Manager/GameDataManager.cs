@@ -7,6 +7,7 @@ public class GameDataManager
     //public List<TableGameKey.ObjTabletGameKey> mListUnPickProp;
     //已经捡起来的物品，true说明被使用，在场景，false说明未使用，在背包
     public  Dictionary<TableGameKey.ObjTabletGameKey,E_PropState> mDicProp;
+    public Dictionary<E_Scene, string> mScene;
     public Vector3 playerPos;
     static GameDataManager instance;
     public static GameDataManager Instance
@@ -20,6 +21,16 @@ public class GameDataManager
 
             return instance;
         }
+    }
+    public void InitSceneName()
+    {
+        if (null == mScene)
+            mScene = new Dictionary<E_Scene, string>();
+        mScene.Add(E_Scene.E_Past, "PastScene");
+        mScene.Add(E_Scene.E_Nor, "NormalScene");
+        mScene.Add(E_Scene.E_Room1, "Room1");
+        mScene.Add(E_Scene.E_Room2, "Room2");
+        mScene.Add(E_Scene.E_Room3, "Room3");
     }
     //捡物品时候，未捡列表发生变化，已经捡起的字典发生变化
     public void PickProp(TableGameKey.ObjTabletGameKey _info)

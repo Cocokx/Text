@@ -19,10 +19,8 @@ public class SceneInfoManager
     bool mIsPause;
     bool mIsInScene1;
     bool mIsInScene2;
-    public string Scene1 = "NormalScene";
-    public string Scene2 = "PastScene";
-    public string nextSceneName;
-    public bool isPassThr;
+    public E_Scene nextScene;
+    public E_Scene nowScene;
     public bool IsInScene1
     {
         get { return mIsInScene1; }
@@ -31,7 +29,7 @@ public class SceneInfoManager
             mIsInScene1 = value;
             if (mIsInScene1)
             {
-                nextSceneName = Scene2;
+                nextScene = E_Scene.E_Nor;
                 mIsInScene2 = false;
             }
         }
@@ -44,31 +42,31 @@ public class SceneInfoManager
             mIsInScene2 = value;
             if (mIsInScene2)
             {
-                nextSceneName = Scene1;
+                nextScene = E_Scene.E_Past;
                 mIsInScene1 = false;
             }
         }
     }
-    public void LoadScene()
-    {
-        if (GameDataManager.Instance.playerPos == null)
-            GameDataManager.Instance.playerPos = new Vector3();
-        GameDataManager.Instance.playerPos = Player.Instance.transform.localPosition;
-        isPassThr = true;
-        Debug.Log("pos" + GameDataManager.Instance.playerPos);
+    //public void LoadScene()
+    //{
+    //    if (GameDataManager.Instance.playerPos == null)
+    //        GameDataManager.Instance.playerPos = new Vector3();
+    //    GameDataManager.Instance.playerPos = Player.Instance.transform.localPosition;
+    //    isPassThr = true;
+    //    Debug.Log("pos" + GameDataManager.Instance.playerPos);
 
 
-        SceneManager.LoadSceneAsync(nextSceneName);
-        if (IsInScene1)
-        {
-            IsInScene2 = true;
-        }
-        else if (IsInScene2)
-        {
-            IsInScene1 = true;
-        }
+    //    SceneManager.LoadSceneAsync(nextSceneName);
+    //    if (IsInScene1)
+    //    {
+    //        IsInScene2 = true;
+    //    }
+    //    else if (IsInScene2)
+    //    {
+    //        IsInScene1 = true;
+    //    }
         
-    }
+    //}
     
     public bool LogicBlock
     {
