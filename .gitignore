@@ -61,3 +61,5 @@
 
 # Crashlytics generated file
 /project/crashlytics-build.properties
+project/Assets/models/small .meta
+project/Assets/prefabs/shurbs.meta
