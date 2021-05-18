@@ -27,8 +27,9 @@ public class UI_EnterRoom : UI_PopUpView
     }
     void BtnEnterClickHandler()
     {
-        GameDirector.Instance.EnterRoom(SceneInfoManager.Instance.nowScene);
         HideView();
+        GameDirector.Instance.EnterRoom(SceneInfoManager.Instance.nowScene);
+        
     }
 }
 

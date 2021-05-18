@@ -57,12 +57,11 @@ public class Player : MonoBehaviour
     }
     public void InitPlayer()
     {
-        Debug.Log("play1");
+        
         if (!GameDirector.Instance.isPassThr)
             return;
         if (null != GameDataManager.Instance.playerPos)
         {
-            //agent.isStopped = true;
             Debug.Log("play" + GameDataManager.Instance.playerPos);
             Player.Instance.transform.localPosition = GameDataManager.Instance.playerPos;
         }
@@ -106,6 +105,10 @@ public class Player : MonoBehaviour
                 else if (hit.collider.gameObject.name == "Password" && triggerType == E_Trigger.E_Password)
                 {
                     UIManager.Instance.CreateUIViewInstance<UI_Password>();
+                }
+                else if (hit.collider.gameObject.name == "Door" && triggerType == E_Trigger.E_Door)
+                {
+                    GameDirector.Instance.BackToScene();
                 }
                 else
                     agent.SetDestination(hit.point);
@@ -205,6 +208,9 @@ public class Player : MonoBehaviour
                 break;
             case "Password":
                 triggerType = E_Trigger.E_Password;
+                break;
+            case "Door":
+                triggerType = E_Trigger.E_Door;
                 break;
         }
         if (other.gameObject.GetComponent<Key>() != null)

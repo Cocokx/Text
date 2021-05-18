@@ -28,6 +28,7 @@ public class GameDirector : MonoBehaviour
         ERoom1,
         ERoom2,
         ERoom3,
+        EBackToScene,
     }
     private InuStateMachine<EGameState> mFSM;
     private void Start()
@@ -49,11 +50,16 @@ public class GameDirector : MonoBehaviour
         mFSM.AddState(EGameState.ERoom1, new StateEnterRoom1(mFSM, EGameState.ERoom1, this));
         mFSM.AddState(EGameState.ERoom2, new StateEnterRoom2(mFSM, EGameState.ERoom2, this));
         mFSM.AddState(EGameState.ERoom3, new StateEnterRoom3(mFSM, EGameState.ERoom3, this));
+        mFSM.AddState(EGameState.EBackToScene, new StateBackScene(mFSM, EGameState.EBackToScene, this));
         mFSM.ChangeState(EGameState.EGameStart);
     }
     public void ChangeTime()
     {
         mFSM.ChangeState(EGameState.ESwitchScene);
+    }
+    public void BackToScene()
+    {
+        mFSM.ChangeState(EGameState.EBackToScene);
     }
     public void EnterRoom(E_Scene scene)
     {
@@ -129,7 +135,7 @@ public class GameDirector : MonoBehaviour
             GameDataManager.Instance.playerPos = Player.Instance.transform.localPosition;
             mInit.isPassThr = true;
             SceneManager.LoadSceneAsync(GameDataManager.Instance.mScene[SceneInfoManager.Instance.nextScene]);
-            mInit.InitPlayer();
+
             if (SceneInfoManager.Instance.IsInScene1)
             {
                 SceneInfoManager.Instance.IsInScene2 = true;
@@ -145,6 +151,23 @@ public class GameDirector : MonoBehaviour
             base.UpdateState();
         }
     }
+    class StateBackScene : StateBase
+    {
+        public StateBackScene(InuStateMachine<EGameState> fsm, EGameState stateName, GameDirector init)
+             : base(fsm, stateName, init)
+        { }
+        public override void EnterState()
+        {
+            base.EnterState();
+            mInit.isPassThr = true;
+            SceneManager.LoadSceneAsync(GameDataManager.Instance.mScene[SceneInfoManager.Instance.nextScene]);
+
+        }
+        public override void UpdateState()
+        {
+            base.UpdateState();
+        }
+    }
     class StateEnterRoom1 : StateBase
     {
         public StateEnterRoom1(InuStateMachine<EGameState> fsm, EGameState stateName, GameDirector init)
@@ -153,7 +176,10 @@ public class GameDirector : MonoBehaviour
         public override void EnterState()
         {
             base.EnterState();
-            //mInit.isPassThr = true;
+            if (GameDataManager.Instance.playerPos == null)
+                GameDataManager.Instance.playerPos = new Vector3();
+            GameDataManager.Instance.playerPos = Player.Instance.transform.localPosition;
+            mInit.isPassThr = false;
             SceneInfoManager.Instance.nextScene = E_Scene.E_Nor;
             SceneManager.LoadSceneAsync(GameDataManager.Instance.mScene[E_Scene.E_Room1]);
         }
@@ -170,8 +196,12 @@ public class GameDirector : MonoBehaviour
         public override void EnterState()
         {
             base.EnterState();
+            if (GameDataManager.Instance.playerPos == null)
+                GameDataManager.Instance.playerPos = new Vector3();
+            GameDataManager.Instance.playerPos = Player.Instance.transform.localPosition;
+            mInit.isPassThr = false;
             SceneInfoManager.Instance.nextScene = E_Scene.E_Nor;
-            SceneManager.LoadSceneAsync(GameDataManager.Instance.mScene[E_Scene.E_Room1]);
+            SceneManager.LoadSceneAsync(GameDataManager.Instance.mScene[E_Scene.E_Room2]);
         }
         public override void UpdateState()
         {
@@ -186,8 +216,12 @@ public class GameDirector : MonoBehaviour
         public override void EnterState()
         {
             base.EnterState();
+            if (GameDataManager.Instance.playerPos == null)
+                GameDataManager.Instance.playerPos = new Vector3();
+            GameDataManager.Instance.playerPos = Player.Instance.transform.localPosition;
+            mInit.isPassThr = false;
             SceneInfoManager.Instance.nextScene = E_Scene.E_Past;
-            SceneManager.LoadSceneAsync(GameDataManager.Instance.mScene[E_Scene.E_Room1]);
+            SceneManager.LoadSceneAsync(GameDataManager.Instance.mScene[E_Scene.E_Room3]);
         }
         public override void UpdateState()
         {

@@ -56,6 +56,7 @@ public enum E_Trigger
     E_Pot,
     E_Gift,
     E_Password,
+    E_Door,
 }
 public enum E_PlatForm
 {
