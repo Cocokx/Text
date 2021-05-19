@@ -9,7 +9,7 @@ public class GameDataManager
     public  Dictionary<TableGameKey.ObjTabletGameKey,E_PropState> mDicProp;
     public Dictionary<E_Scene, string> mScene;
     public Dictionary<E_Scene, List<int>> mPassword;
-    
+    public List<string> mDiaList;
     public Vector3 playerPos;
     static GameDataManager instance;
     public static GameDataManager Instance
@@ -38,6 +38,17 @@ public class GameDataManager
             mPassword = new Dictionary<E_Scene, List<int>>();
         mPassword.Add(E_Scene.E_Room1, room1);
         mPassword.Add(E_Scene.E_Room3, room2);
+    }
+    public void InitDia()
+    {
+        if (null == mDiaList)
+            mDiaList = new List<string>();
+        mDiaList.Add("你好，异乡人,欢迎来到西西小镇");
+        mDiaList.Add("很久之前小镇遭遇环境危机，现已经破败不堪");
+        mDiaList.Add("你身上有种天赋，可以穿梭在时空里");
+        mDiaList.Add("可以利用你的天赋，帮我们恢复小镇往日的容貌吗？");
+        mDiaList.Add("这里有一把钥匙给你，但是已经不能用了");
+        mDiaList.Add("想想办法吧~");
     }
     public void InitSceneName()
     {

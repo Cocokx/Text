@@ -95,10 +95,14 @@ public class Player : MonoBehaviour
                     return;
                 if (null != key && key.ID == (int)triggerType)
                 {
-                    if (key.ID == (int)E_Trigger.E_Seed || key.ID == (int)E_Trigger.E_RoomKey)
+                    if (key.ID == (int)E_Trigger.E_Seed )
                     {
                         Environment.Instance.DisAppearKeys(ClientTableDataManager.Instance.GetTabletGameKeyById(key.ID));
                         GameDataManager.Instance.PickProp(ClientTableDataManager.Instance.GetTabletGameKeyById(key.ID));
+                    }
+                    else if(key.ID == (int)E_Trigger.E_RoomKey)
+                    {
+                        UIManager.Instance.CreateUIViewInstance<UI_Dia>();
                     }
                     else
                     {

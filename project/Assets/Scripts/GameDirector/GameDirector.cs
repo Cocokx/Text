@@ -107,11 +107,13 @@ public class GameDirector : MonoBehaviour
             base.EnterState();
             GameDataManager.Instance.InitSceneName();
             GameDataManager.Instance.InitPassword();
+            GameDataManager.Instance.InitDia();
             mInit.ship = FindObjectOfType<Ship>();
             
             CamManager.Instance.ChangeCam(ECameraState.ECamNormal);
             //CamManager.Instance.ChangeCam(ECameraState.ECamTrackShip);
             UIManager.Instance.CreateUIViewInstance<UI_Begin>();
+            //UIManager.Instance.CreateUIViewInstance<UI_Dia>();
             //UIManager.Instance.CreateUIViewInstance<UI_StartGame>();
             //Player.Instance.transform.GetComponent<NavMeshAgent>().enabled = false;
             //Player.Instance.transform.SetParent(mInit.ship.transform);
