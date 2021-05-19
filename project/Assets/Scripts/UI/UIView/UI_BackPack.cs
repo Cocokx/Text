@@ -105,6 +105,7 @@ public class UI_BackPack : UI_PopUpView
     void BtnConfirmClickHandler()
     {
         HideView();
+        Debug.Log("碰撞体"+Player.Instance.triggerType);
         if(null!= mWillChooseGameKey && (E_Trigger)mWillChooseGameKey.mEffectId == Player.Instance.triggerType)
         {
             //使用影响,需写

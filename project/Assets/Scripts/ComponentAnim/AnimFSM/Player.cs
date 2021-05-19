@@ -212,6 +212,10 @@ public class Player : MonoBehaviour
             case "Door":
                 triggerType = E_Trigger.E_Door;
                 break;
+            case "TimeMachine":
+                UIManager.Instance.CreateUIViewInstance<UI_EnterRoom>();
+                triggerType = E_Trigger.E_TimeMachine;
+                break;
         }
         if (other.gameObject.GetComponent<Key>() != null)
         {
@@ -230,6 +234,7 @@ public class Player : MonoBehaviour
         }
         else if(other.gameObject.GetComponent<Room>() != null)
         {
+            triggerType = E_Trigger.E_Room;
             SceneInfoManager.Instance.nowScene = other.gameObject.GetComponent<Room>().type;
         }
         else
@@ -239,7 +244,9 @@ public class Player : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        triggerType = E_Trigger.E_None;
+        Debug.Log("离开" + other.gameObject.name);
+        if (other.transform.CompareTag("Trigger"))
+            triggerType = E_Trigger.E_None;
         //if (other.gameObject.GetComponent<Key>() != null
         //    || other.gameObject.GetComponent<Prop>() != null)
         //{

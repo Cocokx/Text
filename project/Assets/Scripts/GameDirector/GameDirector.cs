@@ -8,6 +8,7 @@ public class GameDirector : MonoBehaviour
 {
     public static GameDirector Instance = null;
     Ship ship;
+    
     public bool isPassThr;
     private void Awake()
     {
@@ -107,12 +108,14 @@ public class GameDirector : MonoBehaviour
             GameDataManager.Instance.InitSceneName();
             GameDataManager.Instance.InitPassword();
             mInit.ship = FindObjectOfType<Ship>();
-            CamManager.Instance.ChangeCam(ECameraState.ECamTrackShip);
+            
+            CamManager.Instance.ChangeCam(ECameraState.ECamNormal);
+            //CamManager.Instance.ChangeCam(ECameraState.ECamTrackShip);
             UIManager.Instance.CreateUIViewInstance<UI_Begin>();
-            UIManager.Instance.CreateUIViewInstance<UI_StartGame>();
+            //UIManager.Instance.CreateUIViewInstance<UI_StartGame>();
             //Player.Instance.transform.GetComponent<NavMeshAgent>().enabled = false;
-            Player.Instance.transform.SetParent(mInit.ship.transform);
-            Player.Instance.transform.position = new Vector3(0, 0, 0);
+            //Player.Instance.transform.SetParent(mInit.ship.transform);
+            //Player.Instance.transform.position = new Vector3(0, 0, 0);
             Debug.Log(Player.Instance.transform.position);
             SceneInfoManager.Instance.IsInScene1 = true;
             GameDataManager.Instance.InitProp();

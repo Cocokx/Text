@@ -10,7 +10,7 @@ public class Environment : MonoSingleton<Environment>
     Key[] keys;
     public Room[] rooms;
     public List<Transform> Lift;
-    
+    public Plane plane;
     // Start is called before the first frame update
     private void Start()
     {
@@ -22,6 +22,7 @@ public class Environment : MonoSingleton<Environment>
     void InitRoom()
     {
         rooms = FindObjectsOfType<Room>();
+        plane = FindObjectOfType<Plane>();
     }
     public void InitProp()
     {

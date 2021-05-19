@@ -50,13 +50,15 @@ public enum E_Trigger
     E_PlaneKey,
     E_LiftKey,
     E_Seed,
-    E_Plane,
     E_Room,
+    E_Plane,
+    
     E_Lift,
     E_Pot,
     E_Gift,
     E_Password,
     E_Door,
+    E_TimeMachine,
 }
 public enum E_PlatForm
 {
