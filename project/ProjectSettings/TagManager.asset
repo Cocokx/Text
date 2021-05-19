@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Obstacle
   - Trigger
+  - TimeMachine
   layers:
   - Default
   - TransparentFX

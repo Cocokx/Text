@@ -163,7 +163,18 @@ public class GameDirector : MonoBehaviour
         {
             base.EnterState();
             mInit.isPassThr = true;
+            Debug.Log("1" + SceneInfoManager.Instance.IsInScene1);
+            Debug.Log("2" + SceneInfoManager.Instance.IsInScene2);
+            Debug.Log("next" + SceneInfoManager.Instance.nextScene);
             SceneManager.LoadSceneAsync(GameDataManager.Instance.mScene[SceneInfoManager.Instance.nextScene]);
+            if (SceneInfoManager.Instance.IsInScene1)
+            {
+                SceneInfoManager.Instance.nextScene = E_Scene.E_Nor;
+            }
+            else if (SceneInfoManager.Instance.IsInScene2)
+            {
+                SceneInfoManager.Instance.nextScene = E_Scene.E_Past;
+            }
 
         }
         public override void UpdateState()

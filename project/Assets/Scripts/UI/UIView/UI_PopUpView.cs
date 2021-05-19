@@ -32,7 +32,16 @@ public class UI_PopUpView : UIView
         mRectMainPanel.transform.DOScale(mDefaultSize, 0.3f).SetEase(mHideEase).OnComplete(CloseView);
 
     }
+    protected virtual void HideViewOpen()
+    {
+        mRectMainPanel.transform.DOScale(mDefaultSize, 0.3f).SetEase(mHideEase).OnComplete(CloseViewOpen);
 
+    }
+    protected virtual void CloseViewOpen()
+    {
+
+        HideShowOtherUIView(false);
+    }
     protected virtual void CloseView()
     {
 
