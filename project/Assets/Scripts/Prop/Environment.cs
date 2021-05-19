@@ -14,7 +14,6 @@ public class Environment : MonoSingleton<Environment>
     // Start is called before the first frame update
     private void Start()
     {
-        
         InitProp();
         InitKey();
         InitRoom();

@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
         m_dicViewType.Add(typeof(UI_OpenDoor), "UI_OpenDoor");
         m_dicViewType.Add(typeof(UI_BackRoom), "UI_BackRoom");
         m_dicViewType.Add(typeof(UI_Password), "UI_Password");
+        m_dicViewType.Add(typeof(UI_GetProp), "UI_GetProp");
     }
     public T CreateUIViewInstance<T>() where T : UIView
     {

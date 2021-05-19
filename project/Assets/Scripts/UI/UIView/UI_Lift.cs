@@ -7,14 +7,14 @@ public class UI_Lift : UI_PopUpView
     public Button mBtnClose;
     public Button mBtn1;
     public Button mBtn2;
-    public Button mBtn3;
+    //public Button mBtn3;
     protected override void InitEvent()
     {
         base.InitEvent();
         mBtnClose.onClick.AddListener(BtnConfirmClickHandler);
         mBtn1.onClick.AddListener(BtnTo1);
         mBtn2.onClick.AddListener(BtnTo2);
-        mBtn3.onClick.AddListener(BtnTo3);
+        //mBtn3.onClick.AddListener(BtnTo3);
     }
     protected override void ShowView()
     {

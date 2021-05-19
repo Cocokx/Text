@@ -25,6 +25,11 @@ public class UI_Password : UI_PopUpView
         base.CloseView();
         UIManager.Instance.CloseUIViewInstance<UI_Password>();
     }
+    protected override void CloseViewOpen()
+    {
+        base.CloseViewOpen();
+        UIManager.Instance.CloseUIViewInstance<UI_Password>();
+    }
     void BtnCancelClickHandler()
     {
         HideView();
@@ -38,18 +43,32 @@ public class UI_Password : UI_PopUpView
             if (mPassword[i].text != mPin[i].ToString())
             {
                 Debug.Log("输入错误");
+                mError.gameObject.SetActive(true);
                 StartCoroutine(CloseError());
                 return;
             }
                 
         }
         Debug.Log("输入正确");
-        HideView();
+        HideViewOpen();
+        UIManager.Instance.CreateUIViewInstance<UI_GetProp>();
+        //StartCoroutine(Open());
+
+        //if (null != ClientTableDataManager.Instance.GetTabletGameKeyById((int)Player.Instance.triggerType))
+        //    Environment.Instance.DisAppearKeys(ClientTableDataManager.Instance.GetTabletGameKeyById((int)Player.Instance.triggerType));
+        //    GameDataManager.Instance.PickProp(ClientTableDataManager.Instance.GetTabletGameKeyById((int)Player.Instance.triggerType));
+        
+        
     }
     IEnumerator CloseError()
     {
         yield return new WaitForSeconds(2);
         mError.gameObject.SetActive(false);
+    }
+    IEnumerator Open()
+    {
+        yield return new WaitForSeconds(1);
+        UIManager.Instance.CreateUIViewInstance<UI_GetProp>();
     }
 }
 

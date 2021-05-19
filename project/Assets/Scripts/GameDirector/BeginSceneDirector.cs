@@ -23,7 +23,8 @@ public class BeginSceneDirector : MonoSingleton<BeginSceneDirector>
     {
         playableDirector = FindObjectOfType<PlayableDirector>();
         cart = FindObjectOfType<Cinemachine.CinemachineDollyCart>();
-        cart.m_Speed = 0;
+        if (null != cart)
+            cart.m_Speed = 0;
     }
     public void PlayTimeline()
     {

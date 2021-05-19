@@ -68,6 +68,7 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
+        Debug.Log(triggerType);
         //Debug.Log(SceneInfoManager.Instance.IsPause);
         ////鼠标左键点击  
         if (SceneInfoManager.Instance.IsPause)
@@ -94,18 +95,26 @@ public class Player : MonoBehaviour
                     return;
                 if (null != key && key.ID == (int)triggerType)
                 {
-                    Environment.Instance.DisAppearKeys(ClientTableDataManager.Instance.GetTabletGameKeyById(key.ID));
-                    GameDataManager.Instance.PickProp(ClientTableDataManager.Instance.GetTabletGameKeyById(key.ID));
+                    if (key.ID == (int)E_Trigger.E_Seed || key.ID == (int)E_Trigger.E_RoomKey)
+                    {
+                        Environment.Instance.DisAppearKeys(ClientTableDataManager.Instance.GetTabletGameKeyById(key.ID));
+                        GameDataManager.Instance.PickProp(ClientTableDataManager.Instance.GetTabletGameKeyById(key.ID));
+                    }
+                    else
+                    {
+                        UIManager.Instance.CreateUIViewInstance<UI_Password>();
+                    }
+                    
                 }
                 else if (hit.collider.gameObject.name=="Gift" && triggerType == E_Trigger.E_Gift)
                 {
                     CamManager.Instance.ChangeCam(ECameraState.ECamRoomFree);
                     UIManager.Instance.CreateUIViewInstance<UI_BackRoom>();
                 }
-                else if (hit.collider.gameObject.name == "Password" && triggerType == E_Trigger.E_Password)
-                {
-                    UIManager.Instance.CreateUIViewInstance<UI_Password>();
-                }
+                //else if (hit.collider.gameObject.name == "Password" && triggerType == E_Trigger.E_Password)
+                //{
+                //    UIManager.Instance.CreateUIViewInstance<UI_Password>();
+                //}
                 else if (hit.collider.gameObject.name == "Door" && triggerType == E_Trigger.E_Door)
                 {
                     GameDirector.Instance.BackToScene();
@@ -185,7 +194,7 @@ public class Player : MonoBehaviour
                 UIManager.Instance.CreateUIViewInstance<UI_EnterRoom>();
                 break;
             case "RoomTrigger":
-                UIManager.Instance.CreateUIViewInstance<UI_EnterRoom>();
+                //UIManager.Instance.CreateUIViewInstance<UI_EnterRoom>();
                 break;
             case "LeftCamTrigger2":
                 CamManager.Instance.ChangeCam(ECameraState.ECamLeft2);
@@ -206,16 +215,18 @@ public class Player : MonoBehaviour
             case "Gift":
                 triggerType = E_Trigger.E_Gift;
                 break;
-            case "Password":
-                triggerType = E_Trigger.E_Password;
-                break;
+            //case "Password":
+            //    triggerType = E_Trigger.E_Password;
+            //    break;
             case "Door":
                 triggerType = E_Trigger.E_Door;
                 break;
-            case "TimeMachine":
-                UIManager.Instance.CreateUIViewInstance<UI_EnterRoom>();
-                triggerType = E_Trigger.E_TimeMachine;
-                break;
+        }
+        if (other.transform.CompareTag("TimeMachine"))
+        {
+            triggerType = E_Trigger.E_TimeMachine;
+            UIManager.Instance.CreateUIViewInstance<UI_EnterRoom>();
+            
         }
         if (other.gameObject.GetComponent<Key>() != null)
         {
@@ -235,6 +246,7 @@ public class Player : MonoBehaviour
         else if(other.gameObject.GetComponent<Room>() != null)
         {
             triggerType = E_Trigger.E_Room;
+            UIManager.Instance.CreateUIViewInstance<UI_EnterRoom>();
             SceneInfoManager.Instance.nowScene = other.gameObject.GetComponent<Room>().type;
         }
         else
