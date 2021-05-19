@@ -9,6 +9,8 @@ public enum ECameraState
     ECamLeft5,
     ECamTrackShip,
     ECamTrackPlane,
+    ECamRoomFree,
+    ECamRoomNor,
 }
 public enum E_PlayerState
 {
@@ -52,6 +54,9 @@ public enum E_Trigger
     E_Room,
     E_Lift,
     E_Pot,
+    E_Gift,
+    E_Password,
+    E_Door,
 }
 public enum E_PlatForm
 {

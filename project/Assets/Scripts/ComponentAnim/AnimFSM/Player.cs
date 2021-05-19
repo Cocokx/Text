@@ -39,8 +39,9 @@ public class Player : MonoBehaviour
         //public Camera mainCamera;
     void Start()
     {
-        //mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
-        agent = GetComponent<NavMeshAgent>();
+        InitPlayer();
+           //mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
+           agent = GetComponent<NavMeshAgent>();
         agent.enabled = false;
         //ani = GetComponent<Animation>();
         animator = GetComponent<Animator>();
@@ -52,8 +53,19 @@ public class Player : MonoBehaviour
         machine.AddState(walk);
         machine.AddState(climb);
         agent.enabled = true;
+        
     }
-    
+    public void InitPlayer()
+    {
+        
+        if (!GameDirector.Instance.isPassThr)
+            return;
+        if (null != GameDataManager.Instance.playerPos)
+        {
+            Debug.Log("play" + GameDataManager.Instance.playerPos);
+            Player.Instance.transform.localPosition = GameDataManager.Instance.playerPos;
+        }
+    }
     void Update()
     {
         //Debug.Log(SceneInfoManager.Instance.IsPause);
@@ -72,6 +84,7 @@ public class Player : MonoBehaviour
             //Debug.Log(ray);
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
+            //Debug.LogError("------ButtonDown----:");
             if (Physics.Raycast(ray, out hit))
             {
                 Debug.LogError("------hit----:");
@@ -83,6 +96,19 @@ public class Player : MonoBehaviour
                 {
                     Environment.Instance.DisAppearKeys(ClientTableDataManager.Instance.GetTabletGameKeyById(key.ID));
                     GameDataManager.Instance.PickProp(ClientTableDataManager.Instance.GetTabletGameKeyById(key.ID));
+                }
+                else if (hit.collider.gameObject.name=="Gift" && triggerType == E_Trigger.E_Gift)
+                {
+                    CamManager.Instance.ChangeCam(ECameraState.ECamRoomFree);
+                    UIManager.Instance.CreateUIViewInstance<UI_BackRoom>();
+                }
+                else if (hit.collider.gameObject.name == "Password" && triggerType == E_Trigger.E_Password)
+                {
+                    UIManager.Instance.CreateUIViewInstance<UI_Password>();
+                }
+                else if (hit.collider.gameObject.name == "Door" && triggerType == E_Trigger.E_Door)
+                {
+                    GameDirector.Instance.BackToScene();
                 }
                 else
                     agent.SetDestination(hit.point);
@@ -177,6 +203,15 @@ public class Player : MonoBehaviour
                 CamManager.Instance.ChangeCam(ECameraState.ECamNormal);
                 transform.parent = null;
                 break;
+            case "Gift":
+                triggerType = E_Trigger.E_Gift;
+                break;
+            case "Password":
+                triggerType = E_Trigger.E_Password;
+                break;
+            case "Door":
+                triggerType = E_Trigger.E_Door;
+                break;
         }
         if (other.gameObject.GetComponent<Key>() != null)
         {
@@ -204,12 +239,13 @@ public class Player : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.GetComponent<Key>() != null
-            || other.gameObject.GetComponent<Prop>() != null)
-        {
-            triggerType = E_Trigger.E_None;
-            Debug.Log("triggerType" + triggerType);
-        }
+        triggerType = E_Trigger.E_None;
+        //if (other.gameObject.GetComponent<Key>() != null
+        //    || other.gameObject.GetComponent<Prop>() != null)
+        //{
+        //    triggerType = E_Trigger.E_None;
+        //    Debug.Log("triggerType" + triggerType);
+        //}
         if (other.gameObject.name == "LiftTrigger")
         {
             other.transform.GetChild(0).gameObject.SetActive(false);

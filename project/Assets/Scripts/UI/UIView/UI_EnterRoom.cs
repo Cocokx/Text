@@ -9,7 +9,7 @@ public class UI_EnterRoom : UI_PopUpView
     protected override void InitEvent()
     {
         base.InitEvent();
-        mBtnClose.onClick.AddListener(BtnConfirmClickHandler);
+        mBtnClose.onClick.AddListener(BtnCancelClickHandler);
         mBtnEnter.onClick.AddListener(BtnEnterClickHandler);
     }
     protected override void ShowView()
@@ -21,14 +21,15 @@ public class UI_EnterRoom : UI_PopUpView
         base.CloseView();
         UIManager.Instance.CloseUIViewInstance<UI_EnterRoom>();
     }
-    void BtnConfirmClickHandler()
+    void BtnCancelClickHandler()
     {
         HideView();
     }
     void BtnEnterClickHandler()
     {
-
         HideView();
+        GameDirector.Instance.EnterRoom(SceneInfoManager.Instance.nowScene);
+        
     }
 }
 
