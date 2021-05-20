@@ -9,6 +9,7 @@ public class GameDataManager
     public  Dictionary<TableGameKey.ObjTabletGameKey,E_PropState> mDicProp;
     public Dictionary<E_Scene, string> mScene;
     public Dictionary<E_Scene, List<int>> mPassword;
+    public Dictionary<E_TimeMachine, Vector3> mTimeMechinePos;
     public List<string> mDiaList;
     public Vector3 playerPos;
     static GameDataManager instance;

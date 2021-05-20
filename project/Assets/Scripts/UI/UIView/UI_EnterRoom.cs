@@ -33,7 +33,6 @@ public class UI_EnterRoom : UI_PopUpView
     protected override void ShowView()
     {
         base.ShowView();
-
     }
     protected override void CloseView()
     {

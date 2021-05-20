@@ -265,9 +265,11 @@ MonoBehaviour:
   animator: {fileID: 0}
   ps: 0
   triggerType: 0
+  machinePos: 0
   canClimb: 1
   cv: {fileID: 0}
   mLift3: {fileID: 0}
+  canTrigger: 1
 --- !u!65 &6118925
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -553,7 +555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 6.1, z: -14.25}
+  m_FollowOffset: {x: 0, y: 0, z: -55.1}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -5564,7 +5566,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 456180042}
-  m_LocalRotation: {x: -0.04889046, y: 0.942753, z: -0.15965648, w: -0.28868037}
+  m_LocalRotation: {x: -0.048889272, y: 0.94275105, z: -0.15965475, w: -0.28868803}
   m_LocalPosition: {x: 7.4291954, y: 7.005279, z: 11.369455}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -5752,6 +5754,7 @@ MonoBehaviour:
   rooms: []
   Lift: []
   plane: {fileID: 0}
+  timeMachinePos: []
 --- !u!114 &549325548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5900,7 +5903,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 33
+    FieldOfView: 25
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -5913,7 +5916,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 568360170}
-  m_LocalRotation: {x: 0.13315077, y: 0.17387156, z: 0.03180127, w: 0.9752068}
+  m_LocalRotation: {x: 0.07808504, y: 0.22165139, z: -0.01718532, w: -0.97184265}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5991,7 +5994,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 622443478}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -6240,7 +6243,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 33
+    FieldOfView: 25
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -6253,7 +6256,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 663719739}
-  m_LocalRotation: {x: 0.13634676, y: 0.17331924, z: 0.03156081, w: 0.9748713}
+  m_LocalRotation: {x: 0.07680046, y: 0.22162955, z: -0.017478406, w: -0.9719448}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6764,9 +6767,11 @@ MonoBehaviour:
   animator: {fileID: 0}
   ps: 0
   triggerType: 0
+  machinePos: 0
   canClimb: 1
   cv: {fileID: 0}
   mLift3: {fileID: 0}
+  canTrigger: 1
 --- !u!4 &1197839032
 Transform:
   m_ObjectHideFlags: 0
@@ -6837,7 +6842,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 33
+    FieldOfView: 25
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -6850,7 +6855,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1210252039}
-  m_LocalRotation: {x: 0.12997383, y: 0.1743895, z: 0.032059927, w: 0.97553444}
+  m_LocalRotation: {x: 0.07935603, y: 0.22167702, z: -0.016895534, w: -0.9717389}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -7169,7 +7174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 6.1, z: -14.25}
+  m_FollowOffset: {x: 0, y: 0, z: -55.1}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -7261,7 +7266,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1381873410}
-  m_LocalRotation: {x: -0.04889046, y: 0.942753, z: -0.15965648, w: -0.28868037}
+  m_LocalRotation: {x: -0.048889272, y: 0.94275105, z: -0.15965475, w: -0.28868803}
   m_LocalPosition: {x: 11.856069, y: 11.451508, z: 9.86328}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -7379,14 +7384,14 @@ MonoBehaviour:
   m_Follow: {fileID: 622443482}
   m_CommonLens: 1
   m_Lens:
-    FieldOfView: 33
+    FieldOfView: 25
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
   m_YAxis:
     Value: 0.5
-    m_MaxSpeed: 2
+    m_MaxSpeed: 0
     m_AccelTime: 0.2
     m_DecelTime: 0.1
     m_InputAxisName: Mouse Y
@@ -7411,14 +7416,14 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_BindingMode: 5
-  m_SplineCurvature: 0.76
+  m_SplineCurvature: 0.62
   m_Orbits:
-  - m_Height: 3.94
-    m_Radius: 2.25
-  - m_Height: 6.1
-    m_Radius: 14.25
-  - m_Height: 0.87
-    m_Radius: 1.61
+  - m_Height: 2.67
+    m_Radius: 2.3
+  - m_Height: 0
+    m_Radius: 55.1
+  - m_Height: 15.07
+    m_Radius: 5.4
   m_LegacyHeadingBias: 3.4028235e+38
   m_Rigs:
   - {fileID: 663719740}
@@ -7432,7 +7437,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1498054505}
   m_LocalRotation: {x: 0.01696062, y: -0.9735237, z: 0.07694983, w: 0.21457578}
-  m_LocalPosition: {x: 13.46002, y: 24.136229, z: 8.490846}
+  m_LocalPosition: {x: 2.2375755, y: 18.036228, z: 53.868027}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 663719741}
@@ -7816,6 +7821,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: game2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 670505c2ff0a29c4c8d8c07159fae556,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 670505c2ff0a29c4c8d8c07159fae556, type: 3}
@@ -12939,7 +12949,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 6.1, z: -14.25}
+  m_FollowOffset: {x: 0, y: 0, z: -55.1}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1

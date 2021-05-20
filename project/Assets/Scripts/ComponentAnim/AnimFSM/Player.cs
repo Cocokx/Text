@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     public CinemachineVirtualCamera cv;
     public Transform mLift3;
     public static Player Instance = null;
+    public bool canTrigger =true;
     private void Awake()
     {
         if (Instance != null)
@@ -80,6 +81,13 @@ public class Player : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0))
         {
+            if (!canTrigger)
+            {
+                Invoke("DelayShow", 1.5f);
+                canTrigger = true;
+                //transform.GetComponent<BoxCollider>().enabled = true;
+            }
+            
             //摄像机到点击位置的的射线  
             //Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             //Debug.Log(ray);
@@ -129,6 +137,10 @@ public class Player : MonoBehaviour
         }
         ChangeState();
         UpdateAnimation();
+    }
+    void DelayShow()
+    {
+        transform.GetComponent<BoxCollider>().enabled = true;
     }
     void ChangeState()
     {
@@ -226,9 +238,10 @@ public class Player : MonoBehaviour
                 triggerType = E_Trigger.E_Door;
                 break;
         }
-        if (other.transform.CompareTag("TimeMachine"))
+        if (other.gameObject.GetComponent<TimeMachine>() != null)
         {
             triggerType = E_Trigger.E_TimeMachine;
+            GameDirector.Instance.machine = other.gameObject.GetComponent<TimeMachine>().machine;
             UIManager.Instance.CreateUIViewInstance<UI_EnterRoom>();
             
         }

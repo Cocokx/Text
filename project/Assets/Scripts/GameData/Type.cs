@@ -43,6 +43,13 @@ public enum E_Scene
     E_Room2,
     E_Room3,
 }
+public enum E_TimeMachine
+{
+    E_Time1,
+    E_Time2,
+    E_Time3,
+    E_Time4,
+}
 public enum E_Trigger
 {
     E_None,

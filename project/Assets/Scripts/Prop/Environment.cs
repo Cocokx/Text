@@ -11,12 +11,31 @@ public class Environment : MonoSingleton<Environment>
     public Room[] rooms;
     public List<Transform> Lift;
     public Plane plane;
+    public TimeMachinePos[] timeMachinePos;
+    
     // Start is called before the first frame update
     private void Start()
     {
         InitProp();
         InitKey();
         InitRoom();
+        Player.Instance.transform.GetComponent<BoxCollider>().enabled = false;
+        Player.Instance.canTrigger = false;
+    }
+
+    public void InitTimeMachinePos()
+    {
+        timeMachinePos = FindObjectsOfType<TimeMachinePos>();
+        GameDataManager.Instance.mTimeMechinePos = new Dictionary<E_TimeMachine, Vector3>();
+        for(int i = 0; i < timeMachinePos.Length; i++)
+        {
+            GameDataManager.Instance.mTimeMechinePos.Add(timeMachinePos[i].pos, timeMachinePos[i].transform.position);
+        }
+    }
+    public void TimeEffect(Vector3 pos)
+    {
+        GameObject go = Resources.Load<GameObject>("UI/Time/TimeEffect");
+        go = GameObject.Instantiate(go, pos, Quaternion.identity);
     }
     void InitRoom()
     {

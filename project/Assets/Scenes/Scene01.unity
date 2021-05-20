@@ -6007,7 +6007,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 205662591}
-  m_LocalRotation: {x: 0.042622868, y: 0.957375, z: -0.20149237, w: 0.20252723}
+  m_LocalRotation: {x: 0.042620275, y: 0.9573772, z: -0.20149279, w: 0.20251699}
   m_LocalPosition: {x: -6.3599997, y: 16.9, z: 39.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -12864,6 +12864,7 @@ GameObject:
   - component: {fileID: 698588903}
   - component: {fileID: 698588904}
   - component: {fileID: 698588906}
+  - component: {fileID: 698588905}
   m_Layer: 2
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -13000,7 +13001,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -13061,6 +13062,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f17f7013e83987499129b837d0f4861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &698588905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 698588896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: e2e406b886c67be46b9e4c2b91f84c25, type: 2}
 --- !u!114 &698588906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16184,6 +16202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 075b096df326a3f4e80fa47fedbf4c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPassThr: 0
 --- !u!4 &1672948856
 Transform:
   m_ObjectHideFlags: 0
@@ -17494,6 +17513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de700e5884c3b34ba41bb005c9bac98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playableDirector: {fileID: 0}
 --- !u!1 &2086210605
 GameObject:
   m_ObjectHideFlags: 0
@@ -18707,6 +18727,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72c374c0aa74aea489f9e20d3eca309a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rooms: []
+  Lift: []
+  plane: {fileID: 0}
 --- !u!4 &866098342808034166
 Transform:
   m_ObjectHideFlags: 0
@@ -31005,7 +31028,7 @@ MonoBehaviour:
   triggerType: 0
   canClimb: 1
   cv: {fileID: 0}
-  mainCamera: {fileID: 26161409}
+  mLift3: {fileID: 0}
 --- !u!195 &2238192983326346244
 NavMeshAgent:
   m_ObjectHideFlags: 0

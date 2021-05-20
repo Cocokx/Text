@@ -10,6 +10,8 @@ public class GameDirector : MonoBehaviour
     Ship ship;
     
     public bool isPassThr;
+    public bool TimeTravel;
+    public E_TimeMachine machine;
     private void Awake()
     {
         if (Instance != null)
@@ -108,6 +110,7 @@ public class GameDirector : MonoBehaviour
             GameDataManager.Instance.InitSceneName();
             GameDataManager.Instance.InitPassword();
             GameDataManager.Instance.InitDia();
+            Environment.Instance.InitTimeMachinePos();
             mInit.ship = FindObjectOfType<Ship>();
             
             CamManager.Instance.ChangeCam(ECameraState.ECamNormal);
@@ -129,31 +132,56 @@ public class GameDirector : MonoBehaviour
     }
     class StateSwitchScene : StateBase
     {
+        float time = 0;
+        float timeMachine = 2.0f;
+        bool CanChange;
+        GameObject go;
         public StateSwitchScene(InuStateMachine<EGameState> fsm, EGameState stateName, GameDirector init)
              : base(fsm, stateName, init)
         { }
         public override void EnterState()
         {
             base.EnterState();
+            time = 0;
+            timeMachine = 1.0f;
+            CanChange = true;
+            mInit.TimeTravel = true;
             if (GameDataManager.Instance.playerPos == null)
                 GameDataManager.Instance.playerPos = new Vector3();
             GameDataManager.Instance.playerPos = Player.Instance.transform.localPosition;
             mInit.isPassThr = true;
-            SceneManager.LoadSceneAsync(GameDataManager.Instance.mScene[SceneInfoManager.Instance.nextScene]);
-
-            if (SceneInfoManager.Instance.IsInScene1)
-            {
-                SceneInfoManager.Instance.IsInScene2 = true;
-            }
-            else if (SceneInfoManager.Instance.IsInScene2)
-            {
-                SceneInfoManager.Instance.IsInScene1 = true;
-            }
+            go = Resources.Load<GameObject>("Time/TimeEffect");
+            Debug.Log(go.name);
+            go = Instantiate(go, GameDataManager.Instance.mTimeMechinePos[mInit.machine], Quaternion.identity);
 
         }
         public override void UpdateState()
         {
             base.UpdateState();
+            if (CanChange)
+            {
+                if (time < timeMachine)
+                {
+                    time+=Time.deltaTime;
+                }
+                else
+                {
+                    SceneManager.LoadSceneAsync(GameDataManager.Instance.mScene[SceneInfoManager.Instance.nextScene]);
+
+                    if (SceneInfoManager.Instance.IsInScene1)
+                    {
+                        SceneInfoManager.Instance.IsInScene2 = true;
+                    }
+                    else if (SceneInfoManager.Instance.IsInScene2)
+                    {
+                        SceneInfoManager.Instance.IsInScene1 = true;
+                    }
+                    
+                    CanChange = false;
+                    
+                }
+            }
+            
         }
     }
     class StateBackScene : StateBase
@@ -256,4 +284,5 @@ public class GameDirector : MonoBehaviour
             Player.Instance.transform.localPosition = GameDataManager.Instance.playerPos;
         }
     }
+    
 }
