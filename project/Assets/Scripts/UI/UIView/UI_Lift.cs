@@ -32,11 +32,15 @@ public class UI_Lift : UI_PopUpView
     }
     void BtnTo1()
     {
+        GameDirector.Instance.source[1].clip = GameResourceManager.Instance.GetAudioEffectClipByName("Lift");
+        GameDirector.Instance.source[1].Play();
         Player.Instance.SetPlayerPosition(Environment.Instance.Lift[0].position);
         HideView();
     }
     void BtnTo2()
     {
+        GameDirector.Instance.source[1].clip = GameResourceManager.Instance.GetAudioEffectClipByName("Lift");
+        GameDirector.Instance.source[1].Play();
         Player.Instance.SetPlayerPosition(Environment.Instance.Lift[1].position);
         HideView();
     }

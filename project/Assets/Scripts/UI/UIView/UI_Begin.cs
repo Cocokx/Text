@@ -26,8 +26,7 @@ public class UI_Begin : UI_PopUpView
     }
     void BtnConfirmClickHandler()
     {
-        GameDirector.Instance.ChangeTime();
-        //HideView();
+        Application.Quit();
     }
     void BtnBackHandler()
     {

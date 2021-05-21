@@ -11,6 +11,7 @@ public enum ECameraState
     ECamTrackPlane,
     ECamRoomFree,
     ECamRoomNor,
+    ECamEnd,
 }
 public enum E_PlayerState
 {

@@ -22,6 +22,8 @@ public class UI_BackRoom : UI_PopUpView
     void BtnEnterClickHandler()
     {
         CamManager.Instance.ChangeCam(ECameraState.ECamRoomNor);
+        GameDirector.Instance.source[1].clip = GameResourceManager.Instance.GetAudioEffectClipByName("Back");
+        GameDirector.Instance.source[1].Play();
         HideView();
     }
 }

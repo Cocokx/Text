@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     public Animator animator;
     public E_PlayerState ps = E_PlayerState.E_Idle;
     public E_Trigger triggerType = E_Trigger.E_None;
+    public bool canWalk;
     //控制机器
     public StateMachine machine;
     private Vector3 linkStart;//OffMeshLink的开始点  
@@ -75,6 +76,7 @@ public class Player : MonoBehaviour
         if (SceneInfoManager.Instance.IsPause)
         {
             ps = E_PlayerState.E_Idle;
+            GameDirector.Instance.source[2].Stop();
             machine.TranslateState((int)ps);
             
             return;
@@ -105,8 +107,9 @@ public class Player : MonoBehaviour
                 {
                     if (key.ID == (int)E_Trigger.E_Seed )
                     {
-                        Environment.Instance.DisAppearKeys(ClientTableDataManager.Instance.GetTabletGameKeyById(key.ID));
-                        GameDataManager.Instance.PickProp(ClientTableDataManager.Instance.GetTabletGameKeyById(key.ID));
+                        UIManager.Instance.CreateUIViewInstance<UI_GetProp>();
+                        //Environment.Instance.DisAppearKeys(ClientTableDataManager.Instance.GetTabletGameKeyById(key.ID));
+                        //GameDataManager.Instance.PickProp(ClientTableDataManager.Instance.GetTabletGameKeyById(key.ID));
                     }
                     else if(key.ID == (int)E_Trigger.E_RoomKey)
                     {
@@ -122,15 +125,10 @@ public class Player : MonoBehaviour
                 {
                     CamManager.Instance.ChangeCam(ECameraState.ECamRoomFree);
                     UIManager.Instance.CreateUIViewInstance<UI_BackRoom>();
+                    GameDirector.Instance.source[1].clip = GameResourceManager.Instance.GetAudioEffectClipByName("RoomPuzzle");
+                    GameDirector.Instance.source[1].Play();
                 }
-                //else if (hit.collider.gameObject.name == "Password" && triggerType == E_Trigger.E_Password)
-                //{
-                //    UIManager.Instance.CreateUIViewInstance<UI_Password>();
-                //}
-                else if (hit.collider.gameObject.name == "Door" && triggerType == E_Trigger.E_Door)
-                {
-                    GameDirector.Instance.BackToScene();
-                }
+                
                 else
                     agent.SetDestination(hit.point);
             }
@@ -153,11 +151,20 @@ public class Player : MonoBehaviour
             if (speed > 0)
             {
                 //Debug.Log("walk");
+                if (canWalk)
+                {
+                    canWalk = false;
+                    GameDirector.Instance.source[2].clip = GameResourceManager.Instance.GetAudioEffectClipByName("Walk");
+                    GameDirector.Instance.source[2].Play();
+                }
+                
                 ps = E_PlayerState.E_Walk;
             }
             else
             {
                 //Debug.Log("idle");
+                canWalk = true;
+                GameDirector.Instance.source[2].Stop();
                 ps = E_PlayerState.E_Idle;
             }
         }
@@ -231,11 +238,20 @@ public class Player : MonoBehaviour
             case "Gift":
                 triggerType = E_Trigger.E_Gift;
                 break;
+            case "End":
+                BeginSceneDirector.Instance.PlayTimeline();
+                GameDirector.Instance.source[0].Stop();
+                GameDirector.Instance.source[1].Stop();
+                CamManager.Instance.ChangeCam(ECameraState.ECamEnd);
+                break;
             //case "Password":
             //    triggerType = E_Trigger.E_Password;
             //    break;
             case "Door":
                 triggerType = E_Trigger.E_Door;
+                
+                UIManager.Instance.CreateUIViewInstance<UI_EnterRoom>();
+                
                 break;
         }
         if (other.gameObject.GetComponent<TimeMachine>() != null)

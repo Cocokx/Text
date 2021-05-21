@@ -23,7 +23,8 @@ protected override void InitEvent()
     protected override void ShowView()
     {
         base.ShowView();
-        
+        GameDirector.Instance.source[1].clip = GameResourceManager.Instance.GetAudioEffectClipByName("OpenBackpack");
+        GameDirector.Instance.source[1].Play();
     }
     protected override void CloseView()
     {
@@ -35,6 +36,8 @@ protected override void InitEvent()
         if (null != ClientTableDataManager.Instance.GetTabletGameKeyById((int)Player.Instance.triggerType))
             Environment.Instance.DisAppearKeys(ClientTableDataManager.Instance.GetTabletGameKeyById((int)Player.Instance.triggerType));
         GameDataManager.Instance.PickProp(ClientTableDataManager.Instance.GetTabletGameKeyById((int)Player.Instance.triggerType));
+        GameDirector.Instance.source[1].clip = GameResourceManager.Instance.GetAudioEffectClipByName("GetProp");
+        GameDirector.Instance.source[1].Play();
         HideView();
     }
 }

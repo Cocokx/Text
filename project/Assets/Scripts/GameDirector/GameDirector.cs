@@ -8,7 +8,7 @@ public class GameDirector : MonoBehaviour
 {
     public static GameDirector Instance = null;
     Ship ship;
-    
+    public AudioSource[] source;
     public bool isPassThr;
     public bool TimeTravel;
     public E_TimeMachine machine;
@@ -21,7 +21,7 @@ public class GameDirector : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        
+        source = transform.GetComponents<AudioSource>();
     }
     public enum EGameState
     {
@@ -36,7 +36,7 @@ public class GameDirector : MonoBehaviour
     private InuStateMachine<EGameState> mFSM;
     private void Start()
     {
-        InitFSM();
+        InitFSM(); 
     }
 
     // Update is called once per frame
@@ -112,15 +112,17 @@ public class GameDirector : MonoBehaviour
             GameDataManager.Instance.InitDia();
             Environment.Instance.InitTimeMachinePos();
             mInit.ship = FindObjectOfType<Ship>();
-            
+            mInit.isPassThr = false;
+            mInit.source[0].clip = GameResourceManager.Instance.GetBGMByName("Post");
+            mInit.source[0].Play();
+
             CamManager.Instance.ChangeCam(ECameraState.ECamNormal);
-            //CamManager.Instance.ChangeCam(ECameraState.ECamTrackShip);
+            CamManager.Instance.ChangeCam(ECameraState.ECamTrackShip);
             UIManager.Instance.CreateUIViewInstance<UI_Begin>();
-            //UIManager.Instance.CreateUIViewInstance<UI_Dia>();
-            //UIManager.Instance.CreateUIViewInstance<UI_StartGame>();
-            //Player.Instance.transform.GetComponent<NavMeshAgent>().enabled = false;
-            //Player.Instance.transform.SetParent(mInit.ship.transform);
-            //Player.Instance.transform.position = new Vector3(0, 0, 0);
+            UIManager.Instance.CreateUIViewInstance<UI_StartGame>();
+            Player.Instance.transform.GetComponent<NavMeshAgent>().isStopped = true;
+            Player.Instance.transform.SetParent(mInit.ship.transform);
+            Player.Instance.transform.localPosition = new Vector3(0, 0, 2.3F);
             Debug.Log(Player.Instance.transform.position);
             SceneInfoManager.Instance.IsInScene1 = true;
             GameDataManager.Instance.InitProp();
@@ -166,17 +168,8 @@ public class GameDirector : MonoBehaviour
                 }
                 else
                 {
-                    SceneManager.LoadSceneAsync(GameDataManager.Instance.mScene[SceneInfoManager.Instance.nextScene]);
 
-                    if (SceneInfoManager.Instance.IsInScene1)
-                    {
-                        SceneInfoManager.Instance.IsInScene2 = true;
-                    }
-                    else if (SceneInfoManager.Instance.IsInScene2)
-                    {
-                        SceneInfoManager.Instance.IsInScene1 = true;
-                    }
-                    
+                    mInit.SwitchScene();
                     CanChange = false;
                     
                 }
@@ -193,24 +186,90 @@ public class GameDirector : MonoBehaviour
         {
             base.EnterState();
             mInit.isPassThr = true;
-            Debug.Log("1" + SceneInfoManager.Instance.IsInScene1);
-            Debug.Log("2" + SceneInfoManager.Instance.IsInScene2);
-            Debug.Log("next" + SceneInfoManager.Instance.nextScene);
-            SceneManager.LoadSceneAsync(GameDataManager.Instance.mScene[SceneInfoManager.Instance.nextScene]);
-            if (SceneInfoManager.Instance.IsInScene1)
-            {
-                SceneInfoManager.Instance.nextScene = E_Scene.E_Nor;
-            }
-            else if (SceneInfoManager.Instance.IsInScene2)
-            {
-                SceneInfoManager.Instance.nextScene = E_Scene.E_Past;
-            }
-
+            mInit.SwitchBackScene();
         }
         public override void UpdateState()
         {
             base.UpdateState();
         }
+    }
+    public void SwitchRoom1()
+    {
+        UI_Fade fadeView = UIManager.Instance.CreateUIViewInstance<UI_Fade>();
+        fadeView.onFadeIn = LoadRoom1;
+        fadeView.onFadeOut = SwitchSceneComplete;
+    }
+    public void SwitchRoom2()
+    {
+        UI_Fade fadeView = UIManager.Instance.CreateUIViewInstance<UI_Fade>();
+        fadeView.onFadeIn = LoadRoom2;
+        fadeView.onFadeOut = SwitchSceneComplete;
+    }
+    public void SwitchRoom3()
+    {
+        UI_Fade fadeView = UIManager.Instance.CreateUIViewInstance<UI_Fade>();
+        fadeView.onFadeIn = LoadRoom3;
+        fadeView.onFadeOut = SwitchSceneComplete;
+    }
+    public void SwitchScene()
+    {
+        UI_Fade fadeView = UIManager.Instance.CreateUIViewInstance<UI_Fade>();
+        fadeView.onFadeIn = LoadScene;
+        fadeView.onFadeOut = SwitchSceneComplete;
+    }
+    public void SwitchBackScene()
+    {
+        UI_Fade fadeView = UIManager.Instance.CreateUIViewInstance<UI_Fade>();
+        fadeView.onFadeIn = LoadBackScene;
+        fadeView.onFadeOut = SwitchSceneComplete;
+    }
+    public void SwitchSceneComplete()
+    {
+        Debug.Log("SwitchSceneComplete");
+    }
+    public void LoadBackScene()
+    {
+        SceneManager.LoadSceneAsync(GameDataManager.Instance.mScene[SceneInfoManager.Instance.nextScene]);
+        if (SceneInfoManager.Instance.IsInScene1)
+        {
+            SceneInfoManager.Instance.nextScene = E_Scene.E_Nor;
+        }
+        else if (SceneInfoManager.Instance.IsInScene2)
+        {
+            SceneInfoManager.Instance.nextScene = E_Scene.E_Past;
+        }
+    }
+    public void LoadScene()
+    {
+        SceneManager.LoadSceneAsync(GameDataManager.Instance.mScene[SceneInfoManager.Instance.nextScene]);
+
+        if (SceneInfoManager.Instance.IsInScene1)
+        {
+            SceneInfoManager.Instance.IsInScene2 = true;
+            source[0].clip = GameResourceManager.Instance.GetBGMByName("Normal");
+            source[0].Play();
+        }
+        else if (SceneInfoManager.Instance.IsInScene2)
+        {
+            SceneInfoManager.Instance.IsInScene1 = true;
+            source[0].clip = GameResourceManager.Instance.GetBGMByName("Post");
+            source[0].Play();
+        }
+    }
+    public void LoadRoom1()
+    {
+        SceneInfoManager.Instance.nextScene = E_Scene.E_Nor;
+        SceneManager.LoadSceneAsync(GameDataManager.Instance.mScene[E_Scene.E_Room1]);
+    }
+    public void LoadRoom2()
+    {
+        SceneInfoManager.Instance.nextScene = E_Scene.E_Nor;
+        SceneManager.LoadSceneAsync(GameDataManager.Instance.mScene[E_Scene.E_Room2]);
+    }
+    public void LoadRoom3()
+    {
+        SceneInfoManager.Instance.nextScene = E_Scene.E_Past;
+        SceneManager.LoadSceneAsync(GameDataManager.Instance.mScene[E_Scene.E_Room3]);
     }
     class StateEnterRoom1 : StateBase
     {
@@ -224,8 +283,9 @@ public class GameDirector : MonoBehaviour
                 GameDataManager.Instance.playerPos = new Vector3();
             GameDataManager.Instance.playerPos = Player.Instance.transform.localPosition;
             mInit.isPassThr = false;
-            SceneInfoManager.Instance.nextScene = E_Scene.E_Nor;
-            SceneManager.LoadSceneAsync(GameDataManager.Instance.mScene[E_Scene.E_Room1]);
+            mInit.SwitchRoom1();
+            
+            
         }
         public override void UpdateState()
         {
@@ -244,8 +304,7 @@ public class GameDirector : MonoBehaviour
                 GameDataManager.Instance.playerPos = new Vector3();
             GameDataManager.Instance.playerPos = Player.Instance.transform.localPosition;
             mInit.isPassThr = false;
-            SceneInfoManager.Instance.nextScene = E_Scene.E_Nor;
-            SceneManager.LoadSceneAsync(GameDataManager.Instance.mScene[E_Scene.E_Room2]);
+            mInit.SwitchRoom2();
         }
         public override void UpdateState()
         {
@@ -264,8 +323,7 @@ public class GameDirector : MonoBehaviour
                 GameDataManager.Instance.playerPos = new Vector3();
             GameDataManager.Instance.playerPos = Player.Instance.transform.localPosition;
             mInit.isPassThr = false;
-            SceneInfoManager.Instance.nextScene = E_Scene.E_Past;
-            SceneManager.LoadSceneAsync(GameDataManager.Instance.mScene[E_Scene.E_Room3]);
+            mInit.SwitchRoom3();
         }
         public override void UpdateState()
         {

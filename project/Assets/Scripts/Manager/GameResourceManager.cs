@@ -19,7 +19,16 @@ public class GameResourceManager
         Texture2D headIcon = Resources.Load<Texture2D>("Icon/BackPackIcon/" + _name);
         return headIcon;
     }
-
+    public AudioClip GetAudioEffectClipByName(string _name)
+    {
+        AudioClip audioClip = Resources.Load<AudioClip>("Audio/AudioEffect/" + _name);
+        return audioClip;
+    }
+    public AudioClip GetBGMByName(string _name)
+    {
+        AudioClip audioClip = Resources.Load<AudioClip>("Audio/BGM/" + _name);
+        return audioClip;
+    }
     //public Texture2D GetRoleHeadIconByName(string _name)
     //{
     //    Texture2D headIcon = Resources.Load<Texture2D>("Icon/HeaIcon/" + _name);

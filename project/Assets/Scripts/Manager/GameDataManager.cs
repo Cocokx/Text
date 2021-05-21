@@ -29,12 +29,12 @@ public class GameDataManager
     {
         List<int> room1 = new List<int>();
         List<int> room2 = new List<int>();
-        room1.Add(1);
-        room1.Add(2);
-        room1.Add(3);
-        room2.Add(3);
-        room2.Add(3);
-        room2.Add(3);
+        room1.Add(8);
+        room1.Add(9);
+        room1.Add(4);
+        room2.Add(5);
+        room2.Add(2);
+        room2.Add(1);
         if (null == mPassword)
             mPassword = new Dictionary<E_Scene, List<int>>();
         mPassword.Add(E_Scene.E_Room1, room1);

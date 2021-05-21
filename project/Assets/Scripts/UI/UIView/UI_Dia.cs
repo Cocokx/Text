@@ -18,6 +18,8 @@ public class UI_Dia : UI_PopUpView
     protected override void ShowView()
     {
         base.ShowView();
+        GameDirector.Instance.source[1].clip = GameResourceManager.Instance.GetAudioEffectClipByName("Dia");
+        GameDirector.Instance.source[1].Play();
     }
     protected override void CloseView()
     {
@@ -36,7 +38,6 @@ public class UI_Dia : UI_PopUpView
             mAppraiseIndex++;
             mTxtContent.text = mListAppraiseContent[mAppraiseIndex];
             mTxtContent.gameObject.AddComponent<TypewriterEffect>();
-            Invoke("ShowBossTalkAnima", 0.3f);
         }
         else
         {

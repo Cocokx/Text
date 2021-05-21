@@ -19,6 +19,8 @@ public class UI_Password : UI_PopUpView
     {
         base.ShowView();
         mError.gameObject.SetActive(false);
+        GameDirector.Instance.source[1].clip = GameResourceManager.Instance.GetAudioEffectClipByName("OpenBackpack");
+        GameDirector.Instance.source[1].Play();
     }
     protected override void CloseView()
     {
@@ -33,6 +35,8 @@ public class UI_Password : UI_PopUpView
     void BtnCancelClickHandler()
     {
         HideView();
+        GameDirector.Instance.source[1].clip = GameResourceManager.Instance.GetAudioEffectClipByName("Back");
+        GameDirector.Instance.source[1].Play();
     }
     void BtnConfirmClickHandler()
     {
@@ -45,12 +49,16 @@ public class UI_Password : UI_PopUpView
                 Debug.Log("输入错误");
                 mError.gameObject.SetActive(true);
                 StartCoroutine(CloseError());
+                GameDirector.Instance.source[1].clip = GameResourceManager.Instance.GetAudioEffectClipByName("Error");
+                GameDirector.Instance.source[1].Play();
                 return;
             }
                 
         }
         Debug.Log("输入正确");
         HideViewOpen();
+        GameDirector.Instance.source[1].clip = GameResourceManager.Instance.GetAudioEffectClipByName("Passward");
+        GameDirector.Instance.source[1].Play();
         UIManager.Instance.CreateUIViewInstance<UI_GetProp>();
         //StartCoroutine(Open());
 

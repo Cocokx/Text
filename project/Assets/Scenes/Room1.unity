@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -265,7 +265,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   ps: 0
   triggerType: 0
-  machinePos: 0
+  canWalk: 0
   canClimb: 1
   cv: {fileID: 0}
   mLift3: {fileID: 0}
@@ -5732,7 +5732,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 549325545}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.66, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1031622213}
@@ -5798,8 +5798,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 3.2531013, z: 0.99999976}
+  m_Center: {x: 0, y: 1.1265507, z: 0}
 --- !u!23 &566464381
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5916,7 +5916,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 568360170}
-  m_LocalRotation: {x: 0.07808504, y: 0.22165139, z: -0.01718532, w: -0.97184265}
+  m_LocalRotation: {x: 0.08757679, y: 0.22180806, z: -0.015019312, w: -0.9710334}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6256,7 +6256,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 663719739}
-  m_LocalRotation: {x: 0.07680046, y: 0.22162955, z: -0.017478406, w: -0.9719448}
+  m_LocalRotation: {x: 0.07680046, y: 0.22162953, z: -0.017478405, w: -0.97194475}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6601,8 +6601,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 2.1028526}
-  m_Center: {x: 0, y: 0, z: 0.5514263}
+  m_Size: {x: 1, y: 1.830967, z: 2.6018155}
+  m_Center: {x: 0, y: -0.41548347, z: 0.80090773}
 --- !u!114 &1031622212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6767,7 +6767,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   ps: 0
   triggerType: 0
-  machinePos: 0
+  canWalk: 0
   canClimb: 1
   cv: {fileID: 0}
   mLift3: {fileID: 0}
@@ -6855,7 +6855,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1210252039}
-  m_LocalRotation: {x: 0.07935603, y: 0.22167702, z: -0.016895534, w: -0.9717389}
+  m_LocalRotation: {x: 0.09831706, y: 0.22196452, z: -0.012563273, w: -0.970004}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -13350,8 +13350,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5473813, y: 0.41687188, z: 1.9613138}
-  m_Center: {x: -0.025963642, y: 0.27106038, z: 0.16824731}
+  m_Size: {x: 1.2870411, y: 0.41687188, z: 1.1506227}
+  m_Center: {x: -0.15613373, y: 0.27106038, z: 0.21266676}
 --- !u!23 &514502121812504743
 MeshRenderer:
   m_ObjectHideFlags: 0

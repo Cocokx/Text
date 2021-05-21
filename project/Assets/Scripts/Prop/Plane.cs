@@ -20,6 +20,7 @@ public class Plane : MonoBehaviour
             if(transform.GetComponentInParent<CinemachineDollyCart>().m_Position>79)
             {
                 Player.Instance.agent.enabled = true;
+                GameDirector.Instance.source[1].Stop();
                 startPlane = false;
             }
         }

@@ -26,6 +26,8 @@ public class ClimbState : StateTemplate<Player>
         owner.animator.SetInteger("PlayerState", (int)owner.ps);
         //DOTween.To(() => movingValue, x => movingValue = x, linkEnd, 1);
         LinkData();
+        //GameDirector.Instance.source[2].clip = GameResourceManager.Instance.GetAudioEffectClipByName("Climb");
+        GameDirector.Instance.source[2].Stop();
     }
     public override void OnStay(params object[] args)
     {
@@ -51,6 +53,7 @@ public class ClimbState : StateTemplate<Player>
                 owner.agent.CompleteOffMeshLink();
                 owner.agent.isStopped = false;
                 owner.ps = E_PlayerState.E_Walk;
+                GameDirector.Instance.source[2].Stop();
                 owner.canClimb = true;
             }
         }

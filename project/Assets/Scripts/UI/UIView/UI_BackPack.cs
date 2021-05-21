@@ -91,7 +91,8 @@ public class UI_BackPack : UI_PopUpView
     protected override void ShowView()
     {
         base.ShowView();
-
+        GameDirector.Instance.source[1].clip = GameResourceManager.Instance.GetAudioEffectClipByName("OpenBackpack");
+        GameDirector.Instance.source[1].Play();
     }
     protected override void CloseView()
     {
@@ -111,6 +112,8 @@ public class UI_BackPack : UI_PopUpView
             //使用影响,需写
             Debug.Log("使用："+mWillChooseGameKey.mEffet);
             GameDataManager.Instance.UseProp(mWillChooseGameKey);
+            GameDirector.Instance.source[1].clip = GameResourceManager.Instance.GetAudioEffectClipByName("Succeed");
+            GameDirector.Instance.source[1].Play();
             if (mWillChooseGameKey.mEffet == E_KeyEffect.E_Creat)
             {
                 

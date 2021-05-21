@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
         m_dicViewType.Add(typeof(UI_Password), "UI_Password");
         m_dicViewType.Add(typeof(UI_GetProp), "UI_GetProp");
         m_dicViewType.Add(typeof(UI_Dia), "UI_Dia");
+        m_dicViewType.Add(typeof(UI_Fade), "UI_Fade");
     }
     public T CreateUIViewInstance<T>() where T : UIView
     {

@@ -11,7 +11,7 @@ public class Environment : MonoSingleton<Environment>
     public Room[] rooms;
     public List<Transform> Lift;
     public Plane plane;
-    public TimeMachinePos[] timeMachinePos;
+    public TimeMachine[] timeMachinePos;
     
     // Start is called before the first frame update
     private void Start()
@@ -25,11 +25,11 @@ public class Environment : MonoSingleton<Environment>
 
     public void InitTimeMachinePos()
     {
-        timeMachinePos = FindObjectsOfType<TimeMachinePos>();
+        timeMachinePos = FindObjectsOfType<TimeMachine>();
         GameDataManager.Instance.mTimeMechinePos = new Dictionary<E_TimeMachine, Vector3>();
         for(int i = 0; i < timeMachinePos.Length; i++)
         {
-            GameDataManager.Instance.mTimeMechinePos.Add(timeMachinePos[i].pos, timeMachinePos[i].transform.position);
+            GameDataManager.Instance.mTimeMechinePos.Add(timeMachinePos[i].machine, timeMachinePos[i].transform.position);
         }
     }
     public void TimeEffect(Vector3 pos)

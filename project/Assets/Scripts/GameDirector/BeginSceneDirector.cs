@@ -9,7 +9,7 @@ public class BeginSceneDirector : MonoSingleton<BeginSceneDirector>
     void Start()
     {
         InitScene();
-        if(SceneInfoManager.Instance.IsInScene1)
+        
             InitTimeLine();
         if (GameDirector.Instance.TimeTravel)
         {
@@ -20,7 +20,7 @@ public class BeginSceneDirector : MonoSingleton<BeginSceneDirector>
             go = Instantiate(go, GameDataManager.Instance.mTimeMechinePos[GameDirector.Instance.machine], Quaternion.identity);
             
 
-            Destroy(go, 1);
+            Destroy(go, 2);
         }
             
         //Debug.Log("道具"+GameDataManager.Instance.mListUsedPropId.Count);
